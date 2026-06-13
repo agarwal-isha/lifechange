@@ -102,7 +102,8 @@ html, body {
   font-family: 'DM Sans', sans-serif; transition: color 0.2s;
 }
 .nav-btn.active { color: var(--accent); }
-.nav-btn svg { width: 22px; height: 22px; stroke-width: 1.8; }
+.nav-btn svg { width: 19px; height: 19px; stroke-width: 1.8; }
+.nav-btn { font-size: 8.5px; }
 
 /* CARDS */
 .card {
@@ -293,6 +294,170 @@ html, body {
 .type-btn.yn { background: var(--green3); color: var(--green); border-color: var(--green2); }
 .type-btn.num { background: rgba(200,180,255,0.1); color: var(--accent); border-color: var(--accent2); }
 .del-btn { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 16px; padding: 4px; }
+.reorder-col { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
+.reorder-btn {
+  background: var(--bg3); border: 0.5px solid var(--border2); color: var(--text2);
+  width: 24px; height: 17px; border-radius: 5px; cursor: pointer;
+  font-size: 9px; line-height: 1; padding: 0; display: flex; align-items: center; justify-content: center;
+}
+.reorder-btn:disabled { opacity: 0.25; cursor: default; }
+.drag-handle {
+  flex-shrink: 0; cursor: grab; color: var(--text3); font-size: 16px;
+  padding: 0 2px; touch-action: none; user-select: none; line-height: 1;
+}
+.drag-handle:active { cursor: grabbing; }
+.edit-habit-row.dragging { background: var(--bg4); opacity: 0.9; }
+.prio-in {
+  flex: 0 0 44px; width: 44px; background: var(--bg3);
+  border: 0.5px solid var(--border2); border-radius: 8px;
+  padding: 7px 4px; color: var(--accent); font-size: 12px;
+  font-family: 'DM Sans', sans-serif; outline: none; text-align: center;
+}
+.lock-btn {
+  background: var(--bg3); border: 0.5px solid var(--border2);
+  border-radius: 7px; padding: 5px 6px; font-size: 12px; cursor: pointer;
+  flex-shrink: 0;
+}
+.lock-btn.is-locked { background: var(--amber2); border-color: var(--amber); }
+.lockin-now-btn {
+  background: rgba(255,179,71,0.12); border: 0.5px solid rgba(255,179,71,0.35);
+  color: var(--amber); border-radius: 8px; padding: 6px 10px;
+  font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  flex-shrink: 0;
+}
+.edit-habit-block { border-bottom: 0.5px solid var(--border); }
+.edit-habit-block:last-child { border-bottom: none; }
+.active-pill {
+  flex-shrink: 0; min-width: 38px; padding: 6px 10px; border-radius: 7px;
+  font-size: 11px; font-weight: 600; cursor: pointer; border: 0.5px solid;
+  font-family: 'DM Sans', sans-serif;
+}
+.active-pill.on { background: var(--green3); color: var(--green); border-color: var(--green2); }
+.active-pill.off { background: var(--bg3); color: var(--text3); border-color: var(--border2); }
+.day-note-ro {
+  flex: 1; font-size: 12px; color: var(--text2); font-style: italic;
+  line-height: 1.5; padding: 4px 0;
+}
+
+/* ===== FOOD SECTION ===== */
+.food-section {
+  background: var(--bg2); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px;
+}
+.food-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.food-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; }
+.goals-edit-btn {
+  background: var(--bg3); border: 0.5px solid var(--border2); color: var(--text2);
+  border-radius: 8px; padding: 6px 10px; font-size: 11px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; flex-shrink: 0;
+}
+.protein-bars { margin-bottom: 12px; }
+.pbar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.pbar-label { font-size: 11px; color: var(--text2); width: 62px; flex-shrink: 0; }
+.pbar-track { flex: 1; height: 7px; background: var(--bg4); border-radius: 4px; overflow: hidden; }
+.pbar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+.pbar-val { font-size: 11px; width: 56px; text-align: right; flex-shrink: 0; }
+.food-tag {
+  background: rgba(255,179,71,0.12); color: var(--amber); border-radius: 8px;
+  padding: 7px 10px; font-size: 11px; margin-bottom: 6px;
+}
+.food-note {
+  background: var(--green3); color: var(--green); border-radius: 8px;
+  padding: 7px 10px; font-size: 11px; line-height: 1.5; margin-bottom: 10px;
+}
+.meals-list { display: flex; flex-direction: column; gap: 8px; }
+.meal-card { background: var(--bg3); border-radius: 10px; overflow: hidden; }
+.meal-top { display: flex; gap: 10px; padding: 10px 12px; cursor: pointer; align-items: flex-start; }
+.meal-check {
+  width: 24px; height: 24px; border-radius: 7px; flex-shrink: 0;
+  border: 1px solid var(--border2); background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--green); margin-top: 2px;
+}
+.meal-check.on { background: var(--green2); border-color: var(--green); }
+.meal-slot { font-size: 11px; font-weight: 600; color: var(--text2); margin-bottom: 2px; }
+.meal-name { font-size: 13px; color: var(--text); line-height: 1.4; }
+.meal-alt { font-size: 11px; color: var(--text3); margin-top: 3px; line-height: 1.4; }
+.meal-pro { font-size: 11px; color: var(--accent); margin-top: 4px; }
+.meal-done .meal-name { text-decoration: line-through; opacity: 0.6; }
+.prep-box {
+  background: #1a1a2e; color: #c9c7e0; border-radius: 10px;
+  padding: 10px 12px; font-size: 12px; line-height: 1.5; margin-top: 10px;
+}
+.prep-box strong { color: var(--accent); font-weight: 500; }
+.ate-box { margin-top: 10px; }
+
+/* Grocery */
+.groc-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.groc-cat { padding: 6px 0; border-top: 0.5px solid var(--border); }
+.groc-cat-name { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 2px; }
+.groc-items { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* Food progress */
+.food-day-grid { display: flex; gap: 5px; margin-bottom: 4px; }
+.fday {
+  flex: 1; aspect-ratio: 1; border-radius: 8px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; gap: 2px;
+}
+.fday.full { background: var(--green); color: #0d2e23; }
+.fday.partial { background: var(--green2); color: var(--green); }
+.fday.empty { background: var(--bg3); color: var(--text3); }
+.fday .fd-x { font-size: 9px; }
+.fday.fsel { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* Food ring chart */
+.food-ring-row { display: flex; align-items: center; gap: 16px; }
+.ring-svg { flex-shrink: 0; }
+.food-ring-stats { font-size: 13px; color: var(--text2); line-height: 1.8; }
+.food-ring-stats strong { color: var(--text); font-weight: 600; }
+
+/* Food day detail panel */
+.fdd-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.fdd-row { display: flex; gap: 10px; padding: 7px 0; border-top: 0.5px solid var(--border); }
+.fdd-row:first-of-type { border-top: none; }
+.fdd-check {
+  width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 13px;
+  background: var(--bg3); color: var(--text3); border: 0.5px solid var(--border2);
+}
+.fdd-check.on { background: var(--green2); color: var(--green); border-color: var(--green); }
+.fdd-slot { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.4px; }
+.fdd-name { font-size: 13px; color: var(--text); }
+.fdd-done { text-decoration: line-through; opacity: 0.55; }
+.fdd-ate { margin-top: 8px; font-size: 12px; color: var(--text2); font-style: italic; }
+
+/* Week day dots with date numbers */
+.wday .wd-name { font-size: 9px; opacity: 0.9; }
+.wday .wd-date { font-size: 12px; font-weight: 700; }
+.wday .dl { font-size: 8px; }
+
+/* Per-day notes */
+.day-note-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; }
+.day-note-label { font-size: 11px; color: var(--text3); width: 52px; flex-shrink: 0; }
+.day-note-in {
+  flex: 1; background: var(--bg3); border: 0.5px solid var(--border2);
+  border-radius: 8px; padding: 6px 9px; color: var(--text);
+  font-size: 12px; font-family: 'DM Sans', sans-serif; outline: none;
+}
+
+/* Compare-by-number search box */
+.compare-search-box {
+  background: var(--bg2); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 14px;
+}
+.compare-search-row { display: flex; align-items: flex-end; gap: 10px; }
+.compare-search-row label { display: block; font-size: 10px; color: var(--text3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.cmp-num-in {
+  width: 70px; background: var(--bg3); border: 0.5px solid var(--border2);
+  border-radius: 8px; padding: 8px 10px; color: var(--text);
+  font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; text-align: center;
+}
+.cmp-go-btn {
+  flex: 1; padding: 9px; border-radius: 9px; background: var(--accent2);
+  color: #fff; border: none; font-size: 13px; cursor: pointer;
+  font-family: 'Syne', sans-serif; font-weight: 500;
+}
 .add-habit-btn {
   display: flex; align-items: center; gap: 6px;
   padding: 10px 16px; font-size: 12px; color: var(--accent2);
@@ -357,6 +522,56 @@ html, body {
 .trend-dn { color: var(--red); }
 .mini-bars { display: flex; align-items: flex-end; gap: 3px; height: 50px; }
 .mini-bar { flex: 1; border-radius: 3px 3px 0 0; min-height: 4px; }
+
+/* SUNDAY REPORT EXTRAS */
+.sunday-card {
+  background: linear-gradient(135deg, rgba(255,179,71,0.12), rgba(255,179,71,0.04));
+  border: 0.5px solid rgba(255,179,71,0.3);
+  border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px;
+}
+.rp-sub-label { font-size: 11px; color: var(--text3); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+.rp-stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px 0; font-size: 13px; color: var(--text2);
+  border-bottom: 0.5px solid var(--border);
+}
+.rp-stat-row:last-child { border-bottom: none; }
+.rp-stat-row strong { color: var(--text); font-weight: 500; }
+.metric-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 0; border-bottom: 0.5px solid var(--border);
+}
+.metric-row label { font-size: 13px; color: var(--text2); }
+.week-note {
+  width: 100%; min-height: 70px; resize: vertical;
+  background: var(--bg3); border: 0.5px solid var(--border2);
+  border-radius: 10px; padding: 10px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.5;
+  outline: none;
+}
+.hist-card {
+  background: var(--bg2); border: 0.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 8px;
+}
+.hist-head { display: flex; justify-content: space-between; align-items: center; }
+.hist-note { font-size: 12px; color: var(--text2); font-style: italic; margin-top: 6px; line-height: 1.5; }
+.hist-compare-btn {
+  background: none; border: none; color: var(--accent2);
+  font-size: 12px; cursor: pointer; padding: 6px 0 0; font-family: 'DM Sans', sans-serif;
+}
+.compare-pick {
+  width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 6px;
+  background: var(--bg3); border: 0.5px solid var(--border2); border-radius: 10px;
+  color: var(--text); font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.cmp-row {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 6px;
+  padding: 7px 0; font-size: 12px; color: var(--text2);
+  border-bottom: 0.5px solid var(--border); align-items: center;
+}
+.cmp-row span:nth-child(2), .cmp-row span:nth-child(3) { text-align: right; color: var(--text); }
+.cmp-head span { color: var(--text3); font-size: 10px; text-transform: uppercase; }
+.cmp-note { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 4px; }
 
 /* NIGHT POPUP */
 .overlay {
@@ -438,8 +653,9 @@ html, body {
         <div>
           <div class="greeting" id="greeting-text">Good morning</div>
           <div class="page-title" id="user-name-display">Hey!</div>
+          <div id="today-date-line" style="font-size:12px;color:var(--text2);margin-top:3px;"></div>
         </div>
-        <div class="streak-pill" id="streak-display">🔥 0 days</div>
+        <div class="streak-pill" id="streak-display">📅 0 days logged</div>
       </div>
     </div>
     <div class="scroll-body" id="today-body">
@@ -454,15 +670,77 @@ html, body {
   <div class="screen" id="screen-progress">
     <div class="topbar">
       <div class="page-title">This week</div>
+      <div id="week-heading" style="font-size:12px;color:var(--text2);margin-top:2px;"></div>
     </div>
     <div class="scroll-body">
+      <div id="sunday-banner"></div>
       <div class="sec-label">Daily completion</div>
       <div class="week-row" id="week-dots"></div>
       <div class="sec-label">Goal breakdown</div>
       <div id="pillar-bars"></div>
       <div class="insight-box" id="insight-box"></div>
-      <div class="sec-label">Habit spotlight</div>
+      <div class="sec-label">This week at a glance</div>
       <div class="stat-row" id="habit-stats"></div>
+      <div id="progress-food-glance"></div>
+
+      <div class="sec-label" style="margin-top:20px;">📓 Weekly journal &amp; report</div>
+      <div id="report-area"></div>
+
+      <div class="sec-label" style="margin-top:20px;">🔍 Compare two weeks by number</div>
+      <div class="compare-search-box">
+        <div class="compare-search-row">
+          <div>
+            <label>Week</label>
+            <input type="number" min="1" id="cmp-week-a" class="cmp-num-in" placeholder="e.g. 1">
+          </div>
+          <span style="color:var(--text3);font-size:18px;align-self:flex-end;padding-bottom:8px;">vs</span>
+          <div>
+            <label>Week</label>
+            <input type="number" min="1" id="cmp-week-b" class="cmp-num-in" placeholder="e.g. 8">
+          </div>
+          <button class="cmp-go-btn" onclick="compareByNumber()">Compare</button>
+        </div>
+        <div id="cmp-search-msg" style="font-size:11px;color:var(--text3);margin-top:6px;"></div>
+      </div>
+
+      <div class="sec-label" style="margin-top:20px;">📚 All saved reports</div>
+      <div id="report-history"></div>
+    </div>
+  </div>
+
+  <!-- COMPARE OVERLAY -->
+  <div class="overlay" id="compare-overlay" style="align-items:center;">
+    <div class="sheet" id="compare-sheet" style="border-radius:18px;max-height:85vh;overflow-y:auto;"></div>
+  </div>
+
+  <!-- METRICS SCREEN -->
+  <div class="screen" id="screen-metrics">
+    <div class="topbar">
+      <div class="page-title">Metrics</div>
+      <div id="metrics-week-line" style="font-size:12px;color:var(--text2);margin-top:2px;"></div>
+    </div>
+    <div class="scroll-body">
+      <div class="insight-box" style="margin-bottom:14px;">📌 Log your numbers any day this week. The latest value goes into your Sunday report. If you skip a week, last week's value carries forward automatically.</div>
+      <div id="metrics-list"></div>
+      <div style="font-size:11px;color:var(--text3);margin-top:10px;">To add, remove, or rename metrics → Goals tab, scroll to the Metrics section.</div>
+
+      <div class="sec-label" style="margin-top:24px;">🛒 Grocery — this week (read-only)</div>
+      <div id="grocery-list"></div>
+    </div>
+  </div>
+
+  <!-- FOOD WEEK SCREEN -->
+  <div class="screen" id="screen-food">
+    <div class="topbar">
+      <div class="page-title">Food week</div>
+      <div id="food-week-line" style="font-size:12px;color:var(--text2);margin-top:2px;"></div>
+    </div>
+    <div class="scroll-body">
+      <div id="food-progress"></div>
+      <div class="sec-label" style="margin-top:16px;">📅 Selected day</div>
+      <div id="food-day-detail"></div>
+      <div class="sec-label" style="margin-top:20px;">📝 What I ate this week</div>
+      <div id="food-ate-notes"></div>
     </div>
   </div>
 
@@ -487,6 +765,10 @@ html, body {
     <div class="scroll-body">
       <div id="edit-pillars-container"></div>
       <button class="add-pillar-btn" onclick="addPillar()">＋ Add new goal pillar</button>
+      <div class="sec-label" style="margin-top:16px;">🍽️ Food pillar</div>
+      <div id="food-pillar-toggle"></div>
+      <div class="sec-label" style="margin-top:16px;">📊 Metrics (weight, income, mood…)</div>
+      <div id="edit-metrics-container"></div>
       <button class="save-btn" onclick="saveGoals()">Save changes</button>
       <button class="discard-btn" onclick="discardGoals()">Discard</button>
     </div>
@@ -522,6 +804,8 @@ html, body {
         <div class="disc-title">💬 When you skip or miss</div>
         <div class="disc-body" id="motiv-preview"></div>
       </div>
+      <div class="sec-label" style="margin-top:16px;">🍽️ Food tips &amp; reminders</div>
+      <div id="food-tips"></div>
     </div>
   </div>
 
@@ -534,6 +818,14 @@ html, body {
     <button class="nav-btn" onclick="switchScreen('progress',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       Progress
+    </button>
+    <button class="nav-btn" onclick="switchScreen('metrics',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      Metrics
+    </button>
+    <button class="nav-btn" onclick="switchScreen('food',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      Food
     </button>
     <button class="nav-btn" onclick="switchScreen('reminders',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
@@ -550,8 +842,7 @@ html, body {
   </div>
 </div>
 
-<!-- NIGHT CHECK-IN POPUP -->
-<div class="overlay" id="night-overlay">
+<!-- NIGHT CHECK-IN POPUP --><div class="overlay" id="night-overlay">
   <div class="sheet">
     <div class="sheet-title">🌙 End of day</div>
     <div class="sheet-sub">Did you complete your goals today?</div>
@@ -579,7 +870,332 @@ html, body {
   </div>
 </div>
 
+<!-- SUNDAY POPUP -->
+<div class="overlay" id="sunday-overlay">
+  <div class="sheet" style="text-align:center;">
+    <div class="sheet-reward">☀️</div>
+    <div class="sheet-title">Happy Sunday</div>
+    <div class="sheet-sub" id="sunday-pop-msg">A new week is a fresh page.</div>
+    <button class="sheet-btn btn-primary" onclick="closeSundayPop()">See my week →</button>
+  </div>
+</div>
+
+<!-- PROTEIN GOALS OVERLAY -->
+<div class="overlay" id="protein-goals-overlay" style="align-items:center;">
+  <div class="sheet" style="border-radius:18px;">
+    <div class="sheet-title">🎯 Daily protein goals</div>
+    <div class="sheet-sub">Set the target grams for each person.</div>
+    <div class="metric-row"><label>You</label><div class="num-row"><input class="num-in" type="number" id="pg-me" value="50"><span class="unit-lbl">g</span></div></div>
+    <div class="metric-row"><label>Husband</label><div class="num-row"><input class="num-in" type="number" id="pg-hus" value="80"><span class="unit-lbl">g</span></div></div>
+    <div class="metric-row"><label>Daughter</label><div class="num-row"><input class="num-in" type="number" id="pg-dau" value="14"><span class="unit-lbl">g</span></div></div>
+    <button class="sheet-btn btn-primary" style="margin-top:14px;" onclick="saveProteinGoals()">Save goals</button>
+    <button class="sheet-btn btn-secondary" onclick="closeProteinGoals()">Cancel</button>
+  </div>
+</div>
+
 <script>
+/* ============================================================
+   FOOD / MEAL PLAN DATA  —  EDIT THIS BLOCK TO UPDATE THE CHART
+   Each meal: [name, alt, mePro, husPro, dauPro]
+   Day order of meals: Breakfast, Lunch, MidSnack, EveSnack, Dinner
+   This whole MEAL_PLAN object can be replaced later with a new chart.
+   ============================================================ */
+const MEAL_SLOTS = [
+  {key:'breakfast', label:'Breakfast', time:'~9:30am', color:'#EF9F27'},
+  {key:'lunch',     label:'Lunch',     time:'~1:30pm', color:'#4ecca3'},
+  {key:'midsnack',  label:'Mid-Morning Snack', time:'~11am', color:'#64b5f6'},
+  {key:'evesnack',  label:'Evening Snack', time:'~5pm', color:'#c8b4ff'},
+  {key:'dinner',    label:'Dinner',    time:'~8pm', color:'#ff6b6b'},
+];
+const PROTEIN_GOALS_DEFAULT = { me:50, hus:80, dau:14 };
+const DAY_KEYS = ['mon','tue','wed','thu','fri','sat','sun'];
+const DAY_NAMES = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+// helper to keep data terse: m(name, alt, me, hus, dau)
+function m(name, alt, me, hus, dau){ return {name, alt, me, hus, dau}; }
+
+const MEAL_PLAN = {
+  1: {
+    mon: { note:'🍋 Add lemon to dal at lunch — triples iron absorption for you & daughter', meals:{
+      breakfast:m('Suji chilla (2) + mint chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',20,27,8),
+      lunch:m('Chana dal + palak + chapati + curd','Dau: mash dal soft. Lemon on dal for all',18,18,8),
+      midsnack:m('Seasonal fruit (watermelon / papaya)','Dau: small pieces or mash',1,1,1),
+      evesnack:m('Makhana (roasted) + dates (2)','Dau: fewer makhana + dates (1)',3,3,2),
+      dinner:m('Bhindi sabji + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',5,12,3),
+    }, prep:'Soak rajma overnight. Soak almonds & walnuts.'},
+    tue: { tag:'💃 Possible dance day', note:'💃 Banana 30 min before dance class. Sattu drink or warm milk after.', meals:{
+      breakfast:m('Veg poha + sprouts (2 tbsp) + mint chutney','Hus & dau: +1 boiled egg on side. Dau: mash soft',9,16,6),
+      lunch:m('Rajma + chapati + curd','Dau: mash rajma well. Lemon on rajma for all',21,21,9),
+      midsnack:m('Seasonal fruit (banana / guava)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('🎉 Roti pizza (homemade, aata base)','Hus: +1 egg bhurji on side. Dau: soft roti pizza less spice',8,15,4),
+    }, prep:'Soak chole overnight. Soak almonds & walnuts.'},
+    wed: { note:'🥜 Peanut day! Crush peanuts for daughter — no choking risk', meals:{
+      breakfast:m('Besan chilla (2) + coconut chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',20,27,8),
+      lunch:m('Chole + chapati + curd','Dau: mash chole well. Lemon on chole for all',21,21,9),
+      midsnack:m('Seasonal fruit (pineapple / papaya)','Dau: small pieces or mash',1,1,1),
+      evesnack:m('Roasted peanuts (1 handful) + dates 🥜 weekly','Dau: crushed peanuts (very few) + dates (1)',8,8,2),
+      dinner:m('Red dal + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',10,17,5),
+    }, prep:'Soak green chana overnight. Soak almonds & walnuts.'},
+    thu: { note:'♻️ Make extra sambar at breakfast — use same for lunch rice. Zero extra effort!', meals:{
+      breakfast:m('Dosa (2) + sambar','Hus & dau: +1 boiled egg on side. Dau: mash soft',10,17,6),
+      lunch:m('Sambar rice (same sambar from breakfast) + curd','Dau: soft sambar rice mashed well',12,12,6),
+      midsnack:m('Seasonal fruit (banana / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Roasted chana (1 handful) + dates','Same for all. Dau: fewer pieces',7,7,2),
+      dinner:m('🎉 Veg chapati wraps (homemade)','Hus: +1 egg bhurji inside wrap. Dau: soft chapati + filling mashed',8,15,4),
+    }, prep:'Soak white matar overnight. Soak almonds & walnuts.'},
+    fri: { tag:'💃 Possible dance day', note:"💃 Banana before dance. Sattu drink after. Don't skip evening snack!", meals:{
+      breakfast:m('Oats chilla (2) + mint chutney + curd 🌾','Hus & dau: +1 boiled egg on side. Dau: mash soft',21,28,9),
+      lunch:m("Kadhi + rice + curd 🧡 husband's fav",'Dau: soft rice + mild kadhi mixed well',16,16,7),
+      midsnack:m('Seasonal fruit (guava / watermelon)','Dau: small pieces or mash',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('Broken green moong dal + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',11,18,5),
+    }, prep:'Soak kala chana overnight for Saturday. Soak almonds & walnuts.'},
+    sat: { tag:'🟠 Saturday — kala chana ritual + easy dinner', note:'🛒 Order Grocery Part 2 today. Kala chana = weekly iron boost for you!', meals:{
+      breakfast:m('Cheese masala oats + curd 🌾','Hus: extra portion + 1 boiled egg. Dau: plain soft oats + warm milk',13,21,5),
+      lunch:m('Kala chana + chapati + curd','Dau: skip kala chana — soft chapati + curd + warm milk',18,18,4),
+      midsnack:m('Seasonal fruit (apple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Ragi ambi (warm glass) + dates 🌾 once a week',"Dau: warm milk + dates if she doesn't like ambi",3,3,2),
+      dinner:m('Toor dal + chapati (simple, no fancy)','Hus: +1 egg bhurji on side. Dau: mash soft',10,17,5),
+    }, prep:'Keep sprouts ready for Sunday (no cooking). Keep curd & fruit handy. Rest tonight.'},
+    sun: { tag:'😴 Rest day — simplest meals', note:'😴 Order freely for lunch or dinner — Sunday is a planned rest day, no guilt.', meals:{
+      breakfast:m('Toor dal + chapati + sprouts on side (rinse & serve, zero cooking)','Hus & dau: +1 boiled egg on side. Dau: mash dal + soft roti',14,21,6),
+      lunch:m('Chana dal + chapati + curd  OR  order outside','Dau: mash dal + soft roti',18,18,8),
+      midsnack:m('Seasonal fruit (muskmelon / banana)','Dau: mash if needed',1,1,1),
+      evesnack:m('Warm milk + dates (2) 😴','Same for all',4,4,3),
+      dinner:m('Order outside  OR  simple dal + rice','Dau: khichdi if energy, else roti + dal',9,9,5),
+    }, prep:'Soak rajma for Monday. Soak almonds & walnuts. Rest well.'},
+  },
+  2: {
+    mon: { note:'🍋 Lemon on dal at lunch. 🥬 Palak at dinner — great iron for you & daughter.', meals:{
+      breakfast:m('Besan chilla (2) + mint chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',20,27,8),
+      lunch:m('Rajma + chapati + curd','Dau: mash rajma. Lemon on rajma for all',21,21,9),
+      midsnack:m('Seasonal fruit (papaya / banana)','Dau: mash if needed',1,1,1),
+      evesnack:m('Makhana (roasted) + dates (2)','Dau: fewer makhana + dates (1)',3,3,2),
+      dinner:m('Palak sabji + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',7,14,4),
+    }, prep:'Soak chole overnight. Soak almonds & walnuts.'},
+    tue: { tag:'💃 Possible dance day', note:'💃 Banana before dance. Sattu drink after class.', meals:{
+      breakfast:m('Veg poha + sprouts (2 tbsp) + mint chutney','Hus & dau: +1 boiled egg on side. Dau: mash soft',9,16,6),
+      lunch:m('Chole + chapati + curd','Dau: mash chole. Lemon on chole for all',21,21,9),
+      midsnack:m('Seasonal fruit (watermelon / guava)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('🎉 Veg pasta (aata, homemade)','Hus: +1 egg bhurji on side. Dau: soft pasta less spice',9,16,4),
+    }, prep:'Soak green chana overnight. Soak almonds & walnuts.'},
+    wed: { note:'🥜 Peanut day! Crush peanuts for daughter.', meals:{
+      breakfast:m('Suji chilla (2) + coconut chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',20,27,8),
+      lunch:m('Green chana curry + chapati + curd','Dau: mash green chana. Lemon for all',19,19,8),
+      midsnack:m('Seasonal fruit (pineapple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Roasted peanuts (1 handful) + dates 🥜 weekly','Dau: crushed peanuts (few) + dates (1)',8,8,2),
+      dinner:m('Paneer bhurji + chapati 🧀','Hus: +1 egg on side. Dau: soft paneer mashed + roti',14,21,7),
+    }, prep:'Soak white matar overnight. Soak almonds & walnuts.'},
+    thu: { note:'♻️ Extra sambar at breakfast — reuse for lunch rice.', meals:{
+      breakfast:m('Dosa (2) + sambar','Hus & dau: +1 boiled egg on side. Dau: mash soft',10,17,6),
+      lunch:m('Sambar rice (same sambar) + curd','Dau: soft sambar rice mashed',12,12,6),
+      midsnack:m('Seasonal fruit (banana / muskmelon)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sweet potato chaat (lemon + chaat masala)','Dau: plain mashed sweet potato',3,3,2),
+      dinner:m('Toor dal + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',10,17,5),
+    }, prep:'Soak rajma overnight. Soak almonds & walnuts.'},
+    fri: { tag:'💃 Possible dance day', note:"💃 Banana before dance. Sattu after. Don't skip evening snack!", meals:{
+      breakfast:m('Oats chilla (2) + mint chutney + curd 🌾','Hus & dau: +1 boiled egg on side. Dau: mash soft',21,28,9),
+      lunch:m("Kadhi + rice + curd 🧡 husband's fav",'Dau: soft rice + mild kadhi mixed well',16,16,7),
+      midsnack:m('Seasonal fruit (guava / papaya)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('🎉 Roti pizza (homemade)','Hus: +1 egg bhurji on side. Dau: soft roti pizza',8,15,4),
+    }, prep:'Soak kala chana overnight for Saturday. Soak almonds & walnuts.'},
+    sat: { tag:'🟠 Saturday — kala chana ritual + easy dinner', note:"🛒 Order Grocery Part 2 today. Sattu parantha = husband's favourite!", meals:{
+      breakfast:m('Sattu parantha + curd','Hus: +1 boiled egg. Dau: soft parantha + curd + warm milk',16,23,6),
+      lunch:m('Kala chana + chapati + curd','Dau: skip kala chana — soft chapati + curd + warm milk',18,18,4),
+      midsnack:m('Seasonal fruit (apple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Ragi ambi (warm glass) + dates 🌾 once a week','Dau: warm milk + dates if no ambi',3,3,2),
+      dinner:m('Chana dal + chapati (simple, no fancy)','Hus: +1 egg bhurji on side. Dau: mash soft',12,19,5),
+    }, prep:'Keep sprouts ready for Sunday. Keep curd & fruit handy. Rest tonight.'},
+    sun: { tag:'😴 Rest day — simplest meals', note:'😴 Order freely for lunch or dinner. Sunday is a planned rest day.', meals:{
+      breakfast:m('Chana dal + chapati + sprouts on side (rinse & serve)','Hus & dau: +1 boiled egg on side. Dau: mash dal + soft roti',16,23,6),
+      lunch:m('Toor dal + chapati + curd  OR  order outside','Dau: mash dal + soft roti',16,16,7),
+      midsnack:m('Seasonal fruit (muskmelon / banana)','Dau: mash if needed',1,1,1),
+      evesnack:m('Warm milk + dates (2) 😴','Same for all',4,4,3),
+      dinner:m('Order outside  OR  simple dal + rice','Dau: khichdi if energy, else roti + dal',9,9,5),
+    }, prep:'Soak chana for Monday. Soak almonds & walnuts. Rest well.'},
+  },
+  3: {
+    mon: { note:'🍋 Lemon on dal at lunch — 3x iron absorption.', meals:{
+      breakfast:m('Moong dal chilla (2) + mint chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',24,31,10),
+      lunch:m('Chana dal + palak + chapati + curd','Dau: mash dal. Lemon for all',18,18,8),
+      midsnack:m('Seasonal fruit (watermelon / papaya)','Dau: mash if needed',1,1,1),
+      evesnack:m('Makhana (roasted) + dates (2)','Dau: fewer makhana + dates (1)',3,3,2),
+      dinner:m('Bhindi sabji + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',5,12,3),
+    }, prep:'Soak rajma overnight. Soak almonds & walnuts.'},
+    tue: { tag:'💃 Possible dance day', note:'💃 Banana before dance. Sattu drink after class.', meals:{
+      breakfast:m('Veg poha + sprouts (2 tbsp) + mint chutney','Hus & dau: +1 boiled egg on side. Dau: mash soft',9,16,6),
+      lunch:m('Rajma + chapati + curd','Dau: mash rajma. Lemon for all',21,21,9),
+      midsnack:m('Seasonal fruit (banana / guava)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('🎉 Veg chapati wraps (homemade)','Hus: +1 egg bhurji inside. Dau: soft chapati + filling mashed',8,15,4),
+    }, prep:'Soak chole overnight. Soak almonds & walnuts.'},
+    wed: { note:'🥜 Peanut day! 🧀 Tofu this week for protein.', meals:{
+      breakfast:m('Besan chilla (2) + coconut chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',20,27,8),
+      lunch:m('Chole + chapati + curd','Dau: mash chole. Lemon for all',21,21,9),
+      midsnack:m('Seasonal fruit (pineapple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Roasted peanuts (1 handful) + dates 🥜 weekly','Dau: crushed peanuts (few) + dates (1)',8,8,2),
+      dinner:m('Tofu bhurji + chapati 🧀','Hus: +1 egg on side. Dau: soft tofu mashed + roti',13,20,6),
+    }, prep:'Soak green chana overnight. Soak almonds & walnuts.'},
+    thu: { note:'♻️ Extra sambar at breakfast — reuse for lunch rice.', meals:{
+      breakfast:m('Dosa (2) + sambar','Hus & dau: +1 boiled egg on side. Dau: mash soft',10,17,6),
+      lunch:m('Sambar rice (same sambar) + curd','Dau: soft sambar rice mashed',12,12,6),
+      midsnack:m('Seasonal fruit (banana / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sweet potato chaat (lemon + chaat masala)','Dau: plain mashed sweet potato',3,3,2),
+      dinner:m('Black urad dal + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',11,18,5),
+    }, prep:'Soak white matar overnight. Soak almonds & walnuts.'},
+    fri: { tag:'💃 Possible dance day', note:"💃 Banana before dance. Sattu after. Don't skip evening snack!", meals:{
+      breakfast:m('Oats chilla (2) + mint chutney + curd 🌾','Hus & dau: +1 boiled egg on side. Dau: mash soft',21,28,9),
+      lunch:m("Kadhi + rice + curd 🧡 husband's fav",'Dau: soft rice + mild kadhi mixed well',16,16,7),
+      midsnack:m('Seasonal fruit (guava / watermelon)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('🎉 Veg fried rice + curd','Hus: +1 egg (egg fried rice). Dau: soft fried rice less spice',9,16,5),
+    }, prep:'Soak kala chana overnight for Saturday. Soak almonds & walnuts.'},
+    sat: { tag:'🟠 Saturday — kala chana ritual + easy dinner', note:'🛒 Order Grocery Part 2 today.', meals:{
+      breakfast:m('Cheese masala oats + curd 🌾','Hus: extra portion + 1 boiled egg. Dau: plain soft oats + warm milk',13,21,5),
+      lunch:m('Kala chana + chapati + curd','Dau: skip kala chana — soft chapati + curd + warm milk',18,18,4),
+      midsnack:m('Seasonal fruit (apple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Ragi ambi (warm glass) + dates 🌾 once a week','Dau: warm milk + dates if no ambi',3,3,2),
+      dinner:m('Toor dal + chapati (simple, no fancy)','Hus: +1 egg bhurji on side. Dau: mash soft',10,17,5),
+    }, prep:'Keep sprouts ready for Sunday. Keep curd & fruit handy. Rest tonight.'},
+    sun: { tag:'😴 Rest day — simplest meals', note:'😴 Order freely. Sunday is a planned rest day.', meals:{
+      breakfast:m('Toor dal + chapati + sprouts on side (rinse & serve)','Hus & dau: +1 boiled egg on side. Dau: mash dal + soft roti',14,21,6),
+      lunch:m('Chana dal + chapati + curd  OR  order outside','Dau: mash dal + soft roti',18,18,8),
+      midsnack:m('Seasonal fruit (muskmelon / banana)','Dau: mash if needed',1,1,1),
+      evesnack:m('Warm milk + dates (2) 😴','Same for all',4,4,3),
+      dinner:m('Order outside  OR  simple dal + rice','Dau: khichdi if energy, else roti + dal',9,9,5),
+    }, prep:'Soak rajma for Monday. Soak almonds & walnuts. Rest well.'},
+  },
+  4: {
+    mon: { note:'🍋 Lemon on dal/saag — 3x iron absorption. 🥬 Red saag at dinner for iron!', meals:{
+      breakfast:m('Suji chilla (2) + mint chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',20,27,8),
+      lunch:m('Soya pulao (one pot) + curd','Dau: soft soya pulao mashed, less spice',20,20,9),
+      midsnack:m('Seasonal fruit (watermelon / papaya)','Dau: mash if needed',1,1,1),
+      evesnack:m('Makhana (roasted) + dates (2)','Dau: fewer makhana + dates (1)',3,3,2),
+      dinner:m('Red saag (lal saag) sabji + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',7,14,4),
+    }, prep:'Soak rajma overnight. Soak almonds & walnuts.'},
+    tue: { tag:'💃 Possible dance day', note:'💃 Banana before dance. Sattu drink after class.', meals:{
+      breakfast:m('Veg poha + sprouts (2 tbsp) + mint chutney','Hus & dau: +1 boiled egg on side. Dau: mash soft',9,16,6),
+      lunch:m('Rajma + chapati + curd','Dau: mash rajma. Lemon for all',21,21,9),
+      midsnack:m('Seasonal fruit (banana / guava)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('🎉 Aata noodles (veg, homemade)','Hus: +1 egg bhurji on side. Dau: soft noodles less spice',9,16,4),
+    }, prep:'Soak chole overnight. Soak almonds & walnuts.'},
+    wed: { note:'🥜 Peanut day! 🧀 Paneer this week for protein.', meals:{
+      breakfast:m('Moong dal chilla (2) + coconut chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',24,31,10),
+      lunch:m('Chole + chapati + curd','Dau: mash chole. Lemon for all',21,21,9),
+      midsnack:m('Seasonal fruit (pineapple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Roasted peanuts (1 handful) + dates 🥜 weekly','Dau: crushed peanuts (few) + dates (1)',8,8,2),
+      dinner:m('Paneer bhurji + chapati 🧀','Hus: +1 egg on side. Dau: soft paneer mashed + roti',14,21,7),
+    }, prep:'Soak green chana overnight. Soak almonds & walnuts.'},
+    thu: { note:'♻️ Extra sambar at breakfast — reuse for lunch rice.', meals:{
+      breakfast:m('Dosa (2) + sambar','Hus & dau: +1 boiled egg on side. Dau: mash soft',10,17,6),
+      lunch:m('Sambar rice (same sambar) + curd','Dau: soft sambar rice mashed',12,12,6),
+      midsnack:m('Seasonal fruit (banana / muskmelon)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sweet potato chaat (lemon + chaat masala)','Dau: plain mashed sweet potato',3,3,2),
+      dinner:m('Toor dal + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',10,17,5),
+    }, prep:'Soak white matar overnight. Soak almonds & walnuts.'},
+    fri: { tag:'💃 Possible dance day', note:"💃 Banana before dance. Sattu after. Don't skip evening snack!", meals:{
+      breakfast:m('Oats chilla (2) + mint chutney + curd 🌾','Hus & dau: +1 boiled egg on side. Dau: mash soft',21,28,9),
+      lunch:m("Kadhi + rice + curd 🧡 husband's fav",'Dau: soft rice + mild kadhi mixed well',16,16,7),
+      midsnack:m('Seasonal fruit (guava / papaya)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('🎉 Roti pizza (homemade)','Hus: +1 egg bhurji on side. Dau: soft roti pizza',8,15,4),
+    }, prep:'Soak kala chana overnight for Saturday. Soak almonds & walnuts.'},
+    sat: { tag:'🟠 Saturday — kala chana ritual + easy dinner', note:"🛒 Order Grocery Part 2 today. Sattu parantha = husband's favourite!", meals:{
+      breakfast:m('Sattu parantha + curd','Hus: +1 boiled egg. Dau: soft parantha + curd + warm milk',16,23,6),
+      lunch:m('Kala chana + chapati + curd','Dau: skip kala chana — soft chapati + curd + warm milk',18,18,4),
+      midsnack:m('Seasonal fruit (apple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Ragi ambi (warm glass) + dates 🌾 once a week','Dau: warm milk + dates if no ambi',3,3,2),
+      dinner:m('Chana dal + chapati (simple, no fancy)','Hus: +1 egg bhurji on side. Dau: mash soft',12,19,5),
+    }, prep:'Keep sprouts ready for Sunday. Keep curd & fruit handy. Rest tonight.'},
+    sun: { tag:'😴 Rest day — simplest meals', note:'😴 Order freely. Sunday is a planned rest day.', meals:{
+      breakfast:m('Chana dal + chapati + sprouts on side (rinse & serve)','Hus & dau: +1 boiled egg on side. Dau: mash dal + soft roti',16,23,6),
+      lunch:m('Toor dal + chapati + curd  OR  order outside','Dau: mash dal + soft roti',16,16,7),
+      midsnack:m('Seasonal fruit (muskmelon / banana)','Dau: mash if needed',1,1,1),
+      evesnack:m('Warm milk + dates (2) 😴','Same for all',4,4,3),
+      dinner:m('Order outside  OR  simple dal + rice','Dau: khichdi if energy, else roti + dal',9,9,5),
+    }, prep:'Soak chana for Monday. Soak almonds & walnuts. Rest well.'},
+  },
+  5: {
+    mon: { note:'🍋 Lemon on dal at lunch — 3x iron absorption.', meals:{
+      breakfast:m('Moong dal chilla (2) + mint chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',24,31,10),
+      lunch:m('Chana dal + palak + chapati + curd','Dau: mash dal. Lemon for all',18,18,8),
+      midsnack:m('Seasonal fruit (watermelon / papaya)','Dau: mash if needed',1,1,1),
+      evesnack:m('Makhana (roasted) + dates (2)','Dau: fewer makhana + dates (1)',3,3,2),
+      dinner:m('🎉 Veg fried rice + curd','Hus: +1 egg (egg fried rice). Dau: soft fried rice less spice',9,16,5),
+    }, prep:'Soak rajma overnight. Soak almonds & walnuts.'},
+    tue: { tag:'💃 Possible dance day', note:'💃 Banana before dance. Sattu drink after class.', meals:{
+      breakfast:m('Veg poha + sprouts (2 tbsp) + mint chutney','Hus & dau: +1 boiled egg on side. Dau: mash soft',9,16,6),
+      lunch:m('Rajma + chapati + curd','Dau: mash rajma. Lemon for all',21,21,9),
+      midsnack:m('Seasonal fruit (banana / guava)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('🎉 Veg pasta (aata, homemade)','Hus: +1 egg bhurji on side. Dau: soft pasta less spice',9,16,4),
+    }, prep:'Soak chole overnight. Soak almonds & walnuts.'},
+    wed: { note:'🥜 Peanut day! 🧀 Paneer this week for protein.', meals:{
+      breakfast:m('Besan chilla (2) + coconut chutney + curd','Hus & dau: +1 boiled egg on side. Dau: mash soft',20,27,8),
+      lunch:m('Green chana curry + chapati + curd','Dau: mash green chana. Lemon for all',19,19,8),
+      midsnack:m('Seasonal fruit (pineapple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Roasted peanuts (1 handful) + dates 🥜 weekly','Dau: crushed peanuts (few) + dates (1)',8,8,2),
+      dinner:m('Paneer bhurji + chapati 🧀','Hus: +1 egg on side. Dau: soft paneer mashed + roti',14,21,7),
+    }, prep:'Soak white matar overnight. Soak almonds & walnuts.'},
+    thu: { note:'♻️ Extra sambar at breakfast — reuse for lunch rice.', meals:{
+      breakfast:m('Dosa (2) + sambar','Hus & dau: +1 boiled egg on side. Dau: mash soft',10,17,6),
+      lunch:m('Sambar rice (same sambar) + curd','Dau: soft sambar rice mashed',12,12,6),
+      midsnack:m('Seasonal fruit (banana / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sweet potato chaat (lemon + chaat masala)','Dau: plain mashed sweet potato',3,3,2),
+      dinner:m('Red dal + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',10,17,5),
+    }, prep:'Soak kala chana overnight for Saturday. Soak almonds & walnuts.'},
+    fri: { tag:'💃 Possible dance day', note:"💃 Banana before dance. Sattu after. Don't skip evening snack!", meals:{
+      breakfast:m('Oats chilla (2) + mint chutney + curd 🌾','Hus & dau: +1 boiled egg on side. Dau: mash soft',21,28,9),
+      lunch:m("Kadhi + rice + curd 🧡 husband's fav",'Dau: soft rice + mild kadhi mixed well',16,16,7),
+      midsnack:m('Seasonal fruit (guava / watermelon)','Dau: mash if needed',1,1,1),
+      evesnack:m('Sattu drink (lemon + jeera + black salt) + dates','Dau: warm milk + dates instead',7,7,2),
+      dinner:m('Broken green moong dal + chapati','Hus: +1 egg bhurji on side. Dau: mash soft',11,18,5),
+    }, prep:'Soak kala chana overnight for Saturday. Soak almonds & walnuts.'},
+    sat: { tag:'🟠 Saturday — kala chana ritual + easy dinner', note:'🛒 Order Grocery Part 2 today.', meals:{
+      breakfast:m('Cheese masala oats + curd 🌾','Hus: extra portion + 1 boiled egg. Dau: plain soft oats + warm milk',13,21,5),
+      lunch:m('Kala chana + chapati + curd','Dau: skip kala chana — soft chapati + curd + warm milk',18,18,4),
+      midsnack:m('Seasonal fruit (apple / pear)','Dau: mash if needed',1,1,1),
+      evesnack:m('Ragi ambi (warm glass) + dates 🌾 once a week','Dau: warm milk + dates if no ambi',3,3,2),
+      dinner:m('Toor dal + chapati (simple, no fancy)','Hus: +1 egg bhurji on side. Dau: mash soft',10,17,5),
+    }, prep:'Keep sprouts ready for Sunday. Keep curd & fruit handy. Rest tonight.'},
+    sun: { tag:'😴 Rest day — simplest meals', note:'😴 Order freely. Sunday is a planned rest day.', meals:{
+      breakfast:m('Toor dal + chapati + sprouts on side (rinse & serve)','Hus & dau: +1 boiled egg on side. Dau: mash dal + soft roti',14,21,6),
+      lunch:m('Chana dal + chapati + curd  OR  order outside','Dau: mash dal + soft roti',18,18,8),
+      midsnack:m('Seasonal fruit (muskmelon / banana)','Dau: mash if needed',1,1,1),
+      evesnack:m('Warm milk + dates (2) 😴','Same for all',4,4,3),
+      dinner:m('Order outside  OR  simple dal + rice','Dau: khichdi if energy, else roti + dal',9,9,5),
+    }, prep:'Soak rajma for Monday. Soak almonds & walnuts. Rest well.'},
+  },
+};
+
+const GROCERY = {
+  1:{o1:{title:'Order 1 — Mon/Tue',cats:{'Vegetables':'Onion, tomato, palak, bhindi, capsicum, carrot, lauki, lemon, ginger, garlic','Fruits':'Watermelon, papaya, banana, guava, pear','Dal & Legumes':'Chana dal, rajma, chole, toor dal, white matar, broken green moong dal','Grains & Flour':'Mix grain aata, besan, suji, poha, oats, dosa batter','Dairy':'Milk (3-4L), curd, butter, ghee, cheese','Other':'Sattu, dates, makhana, peanuts, roasted chana, coconut, jeera, black salt, seeds powder'}},
+     o2:{title:'Order 2 — Thu/Fri',cats:{'Vegetables':'Broccoli, cauliflower, beans, peas, tomato refill, ginger garlic refill','Fruits':'Apple, muskmelon, pineapple, pear, banana refill','Dal & Legumes':'Kala chana (Sat), full green moong, yellow moong dal','Grains & Flour':'Ragi flour, aata noodles or pasta, oats refill, methi leaves','Dairy':'Milk refill (2-3L), curd (fresh)','Other':'Dates refill, makhana refill, papad, any missing spices'}}},
+  2:{o1:{title:'Order 1 — Mon/Tue',cats:{'Vegetables':'Onion, tomato, palak, lauki, capsicum, carrot, lemon, ginger, garlic','Fruits':'Papaya, banana, watermelon, guava, pear','Dal & Legumes':'Chana dal, rajma, chole, green chana, toor dal, white matar','Grains & Flour':'Mix grain aata, besan, suji, oats, poha, dosa batter, sattu parantha aata','Dairy':'Milk (3-4L), curd, butter, ghee, cheese, paneer (small block)','Other':'Sattu, dates, makhana, peanuts, sweet potato, coconut, jeera, black salt'}},
+     o2:{title:'Order 2 — Thu/Fri',cats:{'Vegetables':'Broccoli, beans, peas, sweet potato refill, tomato refill, ginger garlic','Fruits':'Apple, muskmelon, pineapple, pear','Dal & Legumes':'Kala chana (Sat), full green moong','Grains & Flour':'Ragi flour, aata pasta, oats refill','Dairy':'Milk refill (2-3L), curd (fresh)','Other':'Dates refill, makhana refill, papad, missing spices'}}},
+  3:{o1:{title:'Order 1 — Mon/Tue',cats:{'Vegetables':'Onion, tomato, palak, bhindi, capsicum, carrot, lemon, ginger, garlic','Fruits':'Watermelon, papaya, banana, guava, pear','Dal & Legumes':'Yellow moong dal, chana dal, rajma, chole, green chana, black urad dal','Grains & Flour':'Mix grain aata, besan, suji, oats, poha, dosa batter','Dairy':'Milk (3-4L), curd, butter, ghee, cheese, tofu (small block)','Other':'Sattu, dates, makhana, peanuts, sweet potato, coconut, jeera, black salt'}},
+     o2:{title:'Order 2 — Thu/Fri',cats:{'Vegetables':'Broccoli, cauliflower, beans, peas, tomato refill, ginger garlic','Fruits':'Apple, muskmelon, pineapple, pear','Dal & Legumes':'Kala chana (Sat), white matar, toor dal','Grains & Flour':'Ragi flour, rice, oats refill','Dairy':'Milk refill (2-3L), curd (fresh)','Other':'Dates refill, makhana refill, papad, missing spices'}}},
+  4:{o1:{title:'Order 1 — Mon/Tue',cats:{'Vegetables':'Onion, tomato, lauki, capsicum, carrot, lemon, ginger, garlic','Fruits':'Watermelon, papaya, banana, guava, pear','Dal & Legumes':'Yellow moong dal, chana dal, rajma, chole, soya chunks (pulao)','Grains & Flour':'Mix grain aata, besan, suji, oats, poha, dosa batter, sattu parantha aata','Dairy':'Milk (3-4L), curd, butter, ghee, cheese, paneer (small block)','Other':'Sattu, dates, makhana, peanuts, sweet potato, coconut, jeera, black salt'}},
+     o2:{title:'Order 2 — Thu/Fri',cats:{'Vegetables':'Broccoli, beans, peas, sweet potato refill, tomato refill, ginger garlic','Fruits':'Apple, muskmelon, pineapple, pear','Dal & Legumes':'Kala chana (Sat), white matar, green chana, toor dal','Grains & Flour':'Ragi flour, aata noodles, oats refill','Dairy':'Milk refill (2-3L), curd (fresh)','Other':'Dates refill, makhana refill, papad, missing spices'}}},
+  5:{o1:{title:'Order 1 — Mon/Tue',cats:{'Vegetables':'Onion, tomato, palak, capsicum, carrot, lemon, ginger, garlic','Fruits':'Watermelon, papaya, banana, guava, pear','Dal & Legumes':'Yellow moong dal, chana dal, rajma, chole, green chana','Grains & Flour':'Mix grain aata, besan, suji, oats, poha, dosa batter, rice','Dairy':'Milk (3-4L), curd, butter, ghee, cheese, paneer (small block)','Other':'Sattu, dates, makhana, peanuts, sweet potato, coconut, jeera, black salt'}},
+     o2:{title:'Order 2 — Thu/Fri',cats:{'Vegetables':'Broccoli, beans, peas, tomato refill, ginger garlic','Fruits':'Apple, muskmelon, pineapple, pear','Dal & Legumes':'Kala chana (Sat), white matar, broken green moong, red dal, toor dal','Grains & Flour':'Ragi flour, aata pasta, oats refill','Dairy':'Milk refill (2-3L), curd (fresh)','Other':'Dates refill, makhana refill, papad, missing spices'}}},
+};
+
+const FOOD_TIPS = {
+  nonneg: ['Lemon on dal/palak (3x iron)','Iron tablet after breakfast (no milk then)','Milk at 5pm snack','Sattu drink Tue & Fri','Peanuts Wed snack','Tasty dinners 2x/week','Dance days: banana before + sattu/milk after','Sunday = rest'],
+  goals: ['Fix anemia / low iron','Build strength (editable protein)','Breastfeeding (no calorie cuts)',"Daughter's iron & calcium",'Calcium: 500ml milk + curd','Sustainable weight'],
+};
+/* ============================================================
+   END OF FOOD / MEAL PLAN DATA
+   To update the chart in 2-3 months: replace everything between
+   the BEGIN marker above (MEAL_SLOTS) and this END marker.
+   Nothing below this line needs to change.
+   ============================================================ */
+
 const MOTIV_SKIP = [
   "You didn't skip the goal — you just postponed the version of you that's already waiting.",
   "One missed day doesn't erase six good ones. Show up tomorrow.",
@@ -617,8 +1233,128 @@ const PILLAR_ICONS = ['💚','💼','👨‍👩‍👧','🎯','📚','💰','�
 const PILLAR_COLORS = ['#1D9E75','#8b6fff','#EF9F27','#64b5f6','#ff6b6b','#4ecca3','#c8b4ff','#ffb347'];
 
 function rand(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
-function today() { return new Date().toISOString().split('T')[0]; }
-function daysAgo(n) { const d=new Date(); d.setDate(d.getDate()-n); return d.toISOString().split('T')[0]; }
+// Local-time date string YYYY-MM-DD (avoids UTC shift bug in IST and other zones)
+function dateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+function today() { return dateStr(new Date()); }
+function daysAgo(n) { const d=new Date(); d.setDate(d.getDate()-n); return dateStr(d); }
+function isSunday() { return new Date().getDay() === 0; }
+
+// Which date the Today screen is currently showing/editing
+let selectedDate = today();
+function isEditingPast() { return selectedDate !== today(); }
+
+// Monday of the week that a given date belongs to
+function mondayOf(dateStrInput) {
+  const d = new Date(dateStrInput + 'T00:00:00');
+  const dow = (d.getDay()+6)%7; // 0=Mon ... 6=Sun
+  d.setDate(d.getDate()-dow);
+  return dateStr(d);
+}
+function currentWeekMonday() { return mondayOf(today()); }
+function previousWeekMonday() {
+  const d = new Date(currentWeekMonday()+'T00:00:00');
+  d.setDate(d.getDate()-7);
+  return dateStr(d);
+}
+function weekDates(mondayStr) {
+  const out = [];
+  const m = new Date(mondayStr+'T00:00:00');
+  for(let i=0;i<7;i++){ const d=new Date(m); d.setDate(m.getDate()+i); out.push(dateStr(d)); }
+  return out;
+}
+// Friendly label like "12 May – 18 May"
+function weekLabel(mondayStr) {
+  const dates = weekDates(mondayStr);
+  const opt = {day:'numeric',month:'short'};
+  const a = new Date(dates[0]+'T00:00:00').toLocaleDateString('en-GB',opt);
+  const b = new Date(dates[6]+'T00:00:00').toLocaleDateString('en-GB',opt);
+  return a + ' – ' + b;
+}
+// ISO week number (1-53) for a given Monday date string
+function isoWeekNum(mondayStr) {
+  const d = new Date(mondayStr+'T00:00:00');
+  const target = new Date(d.valueOf());
+  const dayNr = (d.getDay()+6)%7;
+  target.setDate(target.getDate()-dayNr+3); // nearest Thursday
+  const firstThursday = new Date(target.getFullYear(),0,4);
+  const firstDayNr = (firstThursday.getDay()+6)%7;
+  firstThursday.setDate(firstThursday.getDate()-firstDayNr+3);
+  return 1 + Math.round((target - firstThursday)/(7*86400000));
+}
+
+// ===== FOOD: which of the 5 meal-weeks applies to a date =====
+// The cycle silently starts Week 1 on state.mealCycleStart (the coming Monday
+// when the food feature was first opened). Days before that also show Week 1.
+// Week numbers are internal only — never shown to the user.
+function mealWeekForDate(d) {
+  const startMon = state.mealCycleStart || mondayOf(today());
+  const thisMon = mondayOf(d);
+  const diff = Math.round((new Date(thisMon+'T00:00:00') - new Date(startMon+'T00:00:00'))/(7*86400000));
+  if (diff < 0) return 1; // before the cycle starts → show Week 1 meals
+  return (diff % 5) + 1;
+}
+function ensureMealCycleStart() {
+  if (state.mealCycleStart) return;
+  const m = mondayOf(today());
+  if (today() === m) {
+    state.mealCycleStart = m; // today IS Monday — start now
+  } else {
+    const nd = new Date(m+'T00:00:00');
+    nd.setDate(nd.getDate()+7); // start coming Monday
+    state.mealCycleStart = dateStr(nd);
+  }
+  save();
+}
+function dayKeyForDate(d) {
+  const dow = (new Date(d+'T00:00:00').getDay()+6)%7; // 0=Mon
+  return DAY_KEYS[dow];
+}
+function mealDataForDate(d) {
+  return MEAL_PLAN[mealWeekForDate(d)][dayKeyForDate(d)];
+}
+// meal tick storage: key `meal_<date>_<slotKey>` => true
+function isMealDone(d, slotKey) { return !!(state.mealLogs && state.mealLogs[`${d}_${slotKey}`]); }
+function toggleMeal(d, slotKey) {
+  if (!state.mealLogs) state.mealLogs = {};
+  const k = `${d}_${slotKey}`;
+  if (state.mealLogs[k]) delete state.mealLogs[k]; else state.mealLogs[k] = true;
+  save();
+}
+// protein eaten so far today (only ticked meals count)
+function proteinEaten(d) {
+  const data = mealDataForDate(d);
+  const tot = {me:0, hus:0, dau:0};
+  MEAL_SLOTS.forEach(s => {
+    if (isMealDone(d, s.key)) {
+      const meal = data.meals[s.key];
+      tot.me += meal.me; tot.hus += meal.hus; tot.dau += meal.dau;
+    }
+  });
+  return tot;
+}
+// full-day protein potential (all meals)
+function proteinPlanned(d) {
+  const data = mealDataForDate(d);
+  const tot = {me:0, hus:0, dau:0};
+  MEAL_SLOTS.forEach(s => { const meal=data.meals[s.key]; tot.me+=meal.me; tot.hus+=meal.hus; tot.dau+=meal.dau; });
+  return tot;
+}
+function mealsDoneCount(d) {
+  return MEAL_SLOTS.filter(s => isMealDone(d, s.key)).length;
+}
+// "what I actually ate" note (separate from day note)
+function getAteNote(d) { return (state.ateNotes && state.ateNotes[d]) || ''; }
+function saveAteNote(d, val) {
+  if (!state.ateNotes) state.ateNotes = {};
+  if (val.trim()) state.ateNotes[d] = val.trim(); else delete state.ateNotes[d];
+  save();
+}
+function proteinGoals() { return state.proteinGoals || PROTEIN_GOALS_DEFAULT; }
 
 // DATA
 let state = {
@@ -657,14 +1393,68 @@ let state = {
     {id:'r3',label:'Workout time',time:'17:00',enabled:true,calSync:true},
     {id:'r4',label:'Meal check',time:'13:00',enabled:true,calSync:false},
     {id:'r5',label:'Night check-in',time:'21:30',enabled:true,calSync:false},
-    {id:'r6',label:'Sunday report',time:'08:00',enabled:true,calSync:false},
-  ]
+    {id:'r6',label:'Sunday weekly report',time:'20:00',enabled:true,calSync:false},
+  ],
+  // Metrics logged weekly (Sunday check-in). User can rename/add later.
+  metricDefs: [
+    {id:'m_weight', name:'Weight', unit:'kg'},
+    {id:'m_income', name:'Income this week', unit:'₹'},
+    {id:'m_mood',   name:'Mood / energy', unit:'/10'},
+    {id:'m_waist',  name:'Waist', unit:'cm'},
+  ],
+  // Saved Sunday reports, keyed by that week's Monday date.
+  weeklyReports: {},
+  // Metric values logged during a week: { mondayStr: { m_weight: 60, ... } }
+  metricLogs: {},
+  // Week-level notes (editable on Sunday report): { mondayStr: "note" }
+  weekNotes: {},
+  // Per-day notes (editable on each day page): { dateStr: "note" }
+  dayNotes: {},
+  // Food tracking: meal ticks { "dateStr_slot": true }, "ate" notes { dateStr: "text" }
+  mealLogs: {},
+  ateNotes: {},
+  proteinGoals: { me: 50, hus: 80, dau: 14 },
+  foodEnabled: true
 };
 
 function save() { localStorage.setItem('lc_state', JSON.stringify(state)); }
 function load() {
   const s = localStorage.getItem('lc_state');
-  if (s) { try { state = JSON.parse(s); } catch(e){} }
+  if (s) {
+    try {
+      const loaded = JSON.parse(s);
+      state = loaded;
+      // Migration for users on older versions
+      if (!state.metricDefs) state.metricDefs = [
+        {id:'m_weight', name:'Weight', unit:'kg'},
+        {id:'m_income', name:'Income this week', unit:'₹'},
+        {id:'m_mood',   name:'Mood / energy', unit:'/10'},
+        {id:'m_waist',  name:'Waist', unit:'cm'},
+      ];
+      if (!state.weeklyReports) state.weeklyReports = {};
+      if (!state.logs) state.logs = {};
+      if (!state.metricLogs) state.metricLogs = {};
+      if (!state.weekNotes) state.weekNotes = {};
+      if (!state.dayNotes) state.dayNotes = {};
+      if (!state.mealLogs) state.mealLogs = {};
+      if (!state.ateNotes) state.ateNotes = {};
+      if (!state.proteinGoals) state.proteinGoals = { me:50, hus:80, dau:14 };
+      if (state.foodEnabled === undefined) state.foodEnabled = true;
+    } catch(e){}
+  }
+}
+
+// Count of distinct days the user logged at least one thing
+function daysLoggedCount() {
+  const days = new Set();
+  Object.keys(state.logs).forEach(k => {
+    const log = state.logs[k];
+    const date = k.substring(k.indexOf('_')+1);
+    if (log && (log.status === 'done' || log.status === 'skipped' || (log.value && log.value > 0))) {
+      days.add(date);
+    }
+  });
+  return days.size;
 }
 
 function getDaysSinceStart() {
@@ -673,7 +1463,18 @@ function getDaysSinceStart() {
   return Math.floor((now - start) / 86400000);
 }
 
-function isLocked(sg) { return sg.unlockDay > getDaysSinceStart(); }
+function isLocked(sg) {
+  if (sg.manualLock) return true;      // user deactivated it
+  if (sg.manualUnlock) return false;   // user activated it
+  return sg.unlockDay > getDaysSinceStart(); // otherwise follow the schedule
+}
+
+// Lock in (activate) a habit right now, anytime
+function lockInHabit(sgId) {
+  state.pillars.forEach(p=>p.subgoals.forEach(sg=>{ if(sg.id===sgId) sg.manualUnlock = true; }));
+  save();
+  renderToday();
+}
 
 function getLog(sgId, date) {
   const key = sgId + '_' + date;
@@ -737,10 +1538,62 @@ function startApp() {
 
 function initApp() {
   updateGreeting();
+  ensureMealCycleStart();
+  autoSaveMissedWeeks();
   renderToday();
   renderReminders();
   renderProgress();
   scheduleNightCheckin();
+  checkSundayReport();
+  scheduleSundayReport();
+}
+
+// Fire the Sunday report notification + auto-show, once per Sunday
+function checkSundayReport() {
+  if (!isSunday()) return;
+  // Only trigger from 8 PM onwards on Sunday
+  if (new Date().getHours() < 20) return;
+  const todayKey = today();
+  if (state.lastSundayNotified === todayKey) return;
+  state.lastSundayNotified = todayKey;
+  save();
+  // In-app: jump to Progress so they see the report
+  setTimeout(()=>{
+    switchScreen('progress', document.querySelectorAll('.nav-btn')[1]);
+    document.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active',i===1));
+    showSundayPopup();
+  }, 800);
+  // Phone notification
+  fireNotification('☀️ Your weekly report is ready', 'Happy Sunday! See how your week went and write your journal note for the week.');
+}
+
+function showSundayPopup() {
+  document.getElementById('sunday-pop-msg').textContent = rand(SUNDAY_QUOTES);
+  document.getElementById('sunday-overlay').classList.add('show');
+}
+function closeSundayPop() { document.getElementById('sunday-overlay').classList.remove('show'); }
+
+function fireNotification(title, body) {
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'granted') {
+    try { new Notification(title, { body, icon:'icon-192.png', badge:'icon-192.png' }); } catch(e){}
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then(p=>{
+      if (p === 'granted') { try { new Notification(title, { body, icon:'icon-192.png' }); } catch(e){} }
+    });
+  }
+}
+
+// Schedule a check for next Sunday 8 PM while app is open
+function scheduleSundayReport() {
+  const now = new Date();
+  const target = new Date(now);
+  const daysUntilSun = (7 - now.getDay()) % 7;
+  target.setDate(now.getDate() + daysUntilSun);
+  target.setHours(20,0,0,0); // 8 PM
+  if (target <= now) target.setDate(target.getDate()+7);
+  const delay = Math.min(target - now, 2147483647);
+  setTimeout(()=>{ checkSundayReport(); scheduleSundayReport(); }, delay);
 }
 
 function updateGreeting() {
@@ -748,18 +1601,43 @@ function updateGreeting() {
   const g = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
   document.getElementById('greeting-text').textContent = g;
   document.getElementById('user-name-display').textContent = state.userName + ' ✦';
-  document.getElementById('streak-display').textContent = '🔥 ' + calculateStreak() + ' days';
+  const dl = document.getElementById('today-date-line');
+  if (dl) {
+    const now = new Date();
+    dl.textContent = now.toLocaleDateString('en-GB',{weekday:'long', day:'numeric', month:'long'}) + ' · Week ' + isoWeekNum(currentWeekMonday());
+  }
+  refreshCounter();
+}
+
+function refreshCounter() {
+  const n = daysLoggedCount();
+  document.getElementById('streak-display').textContent = '📅 ' + n + (n===1?' day logged':' days logged');
 }
 
 // RENDER TODAY
 function renderToday() {
   const container = document.getElementById('pillars-container');
   container.innerHTML = '';
+
+  // Editing-past banner
+  let banner = document.getElementById('editing-banner');
+  if (banner) banner.remove();
+  if (isEditingPast()) {
+    const d = new Date(selectedDate+'T00:00:00');
+    const label = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'});
+    const bdiv = document.createElement('div');
+    bdiv.id = 'editing-banner';
+    bdiv.className = 'unlock-notice';
+    bdiv.style.cssText = 'background:rgba(255,179,71,0.1);border-color:rgba(255,179,71,0.3);color:var(--amber);justify-content:space-between;';
+    bdiv.innerHTML = `<span>✏️ Editing <strong>${label}</strong></span><span style="cursor:pointer;text-decoration:underline;" onclick="backToToday()">Back to today</span>`;
+    container.appendChild(bdiv);
+  }
+
   const days = getDaysSinceStart();
   const notice = document.getElementById('unlock-notice');
-  if (days < 14) {
+  if (days < 14 && !isEditingPast()) {
     notice.style.display = 'flex';
-    document.getElementById('unlock-text').textContent = `Day ${days} — Building your base. More habits unlock at day 14.`;
+    document.getElementById('unlock-text').textContent = `Day ${days} — Building your base. Inactive habits are in the Goals tab — activate any of them whenever you're ready.`;
   } else { notice.style.display = 'none'; }
 
   state.pillars.forEach(pillar => {
@@ -769,7 +1647,7 @@ function renderToday() {
 
     const active = pillar.subgoals.filter(sg => !isLocked(sg));
     const doneCt = active.filter(sg => {
-      const log = getLog(sg.id, today());
+      const log = getLog(sg.id, selectedDate);
       return sg.type==='bool' ? log.status==='done' : log.value > 0;
     }).length;
     const pct = active.length ? Math.round(doneCt/active.length*100) : 0;
@@ -780,7 +1658,7 @@ function renderToday() {
           <div class="pillar-icon" style="background:${pillar.color}22;">${pillar.icon}</div>
           <div>
             <div class="pillar-name">${pillar.name}</div>
-            <div class="pillar-sub" id="psub-${pillar.id}">${doneCt}/${active.length} done today</div>
+            <div class="pillar-sub" id="psub-${pillar.id}">${doneCt}/${active.length} done${isEditingPast()?'':' today'}</div>
           </div>
         </div>
         <svg class="chevron open" id="chev-${pillar.id}" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -792,17 +1670,120 @@ function renderToday() {
       </div>`;
     container.appendChild(div);
   });
+
+  // ===== FOOD SECTION (only if Food pillar is active) =====
+  if (state.foodEnabled) {
+    container.appendChild(renderFoodSection(selectedDate));
+  }
+
+  // Day note — editable here (and only here); shows read-only on the Sunday report
+  const noteCard = document.createElement('div');
+  noteCard.className = 'card';
+  noteCard.style.cssText = 'padding:13px 16px;';
+  const noteVal = getDayNote(selectedDate).replace(/"/g,'&quot;');
+  noteCard.innerHTML = `
+    <div class="rp-sub-label">📝 Note for this day</div>
+    <input class="day-note-in" value="${noteVal}" placeholder="How did this day go? (saves automatically)" onchange="saveDayNote('${selectedDate}', this.value)">`;
+  container.appendChild(noteCard);
+}
+
+function renderFoodSection(d) {
+  const data = mealDataForDate(d);
+  const wk = mealWeekForDate(d);
+  const goals = proteinGoals();
+  const eaten = proteinEaten(d);
+  const wrap = document.createElement('div');
+  wrap.className = 'food-section';
+
+  function bar(label, val, goal, color) {
+    const pct = Math.min(100, Math.round(val/goal*100));
+    const met = val >= goal;
+    return `<div class="pbar-row">
+      <div class="pbar-label">${label}</div>
+      <div class="pbar-track"><div class="pbar-fill" style="width:${pct}%;background:${met?'var(--green)':'var(--amber)'};"></div></div>
+      <div class="pbar-val" style="color:${met?'var(--green)':'var(--text2)'};">${val}/${goal}g</div>
+    </div>`;
+  }
+
+  const tagHtml = data.tag ? `<div class="food-tag">${data.tag}</div>` : '';
+  const noteHtml = data.note ? `<div class="food-note">${data.note}</div>` : '';
+
+  const mealsHtml = MEAL_SLOTS.map(s => {
+    const meal = data.meals[s.key];
+    const done = isMealDone(d, s.key);
+    return `<div class="meal-card ${done?'meal-done':''}" style="border-left:3px solid ${s.color};">
+      <div class="meal-top" onclick="onMealToggle('${d}','${s.key}')">
+        <div class="meal-check ${done?'on':''}">${done?'✓':''}</div>
+        <div style="flex:1;min-width:0;">
+          <div class="meal-slot">${s.label} <span style="color:var(--text3);font-weight:400;">${s.time}</span></div>
+          <div class="meal-name">${meal.name}</div>
+          ${meal.alt?`<div class="meal-alt">✏️ ${meal.alt}</div>`:''}
+          <div class="meal-pro">You ${meal.me}g · Hus ${meal.hus}g · Dau ${meal.dau}g</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const ateVal = getAteNote(d).replace(/"/g,'&quot;');
+
+  wrap.innerHTML = `
+    <div class="food-header">
+      <div>
+        <div class="food-title">🍽️ Food · ${DAY_NAMES[DAY_KEYS.indexOf(dayKeyForDate(d))]}</div>
+        <div style="font-size:11px;color:var(--text3);">${mealsDoneCount(d)}/5 meals ticked</div>
+      </div>
+      <button class="goals-edit-btn" onclick="openProteinGoals()">🎯 Goals</button>
+    </div>
+    <div class="protein-bars">
+      ${bar('You', eaten.me, goals.me)}
+      ${bar('Husband', eaten.hus, goals.hus)}
+      ${bar('Daughter', eaten.dau, goals.dau)}
+    </div>
+    ${tagHtml}${noteHtml}
+    <div class="meals-list">${mealsHtml}</div>
+    <div class="ate-box">
+      <div class="rp-sub-label">📝 What I actually ate (instead of / extra)</div>
+      <input class="day-note-in" value="${ateVal}" placeholder="e.g. ordered outside, skipped lunch…" onchange="saveAteNote('${d}', this.value)">
+    </div>
+    <div class="prep-box">🌙 <strong>Tonight — prep for tomorrow:</strong> ${data.prep}</div>`;
+  return wrap;
+}
+
+function onMealToggle(d, slotKey) {
+  toggleMeal(d, slotKey);
+  // re-render just the today screen to update protein + checkmarks
+  renderToday();
+}
+
+function openProteinGoals() {
+  const g = proteinGoals();
+  document.getElementById('pg-me').value = g.me;
+  document.getElementById('pg-hus').value = g.hus;
+  document.getElementById('pg-dau').value = g.dau;
+  document.getElementById('protein-goals-overlay').classList.add('show');
+}
+function saveProteinGoals() {
+  state.proteinGoals = {
+    me: parseInt(document.getElementById('pg-me').value)||50,
+    hus: parseInt(document.getElementById('pg-hus').value)||80,
+    dau: parseInt(document.getElementById('pg-dau').value)||14,
+  };
+  save();
+  document.getElementById('protein-goals-overlay').classList.remove('show');
+  renderToday();
+}
+function closeProteinGoals() { document.getElementById('protein-goals-overlay').classList.remove('show'); }
+
+function backToToday() {
+  selectedDate = today();
+  renderToday();
+  document.getElementById('today-body').scrollTop = 0;
 }
 
 function renderHabitRow(sg, pillar) {
   const locked = isLocked(sg);
-  const log = getLog(sg.id, today());
-  if (locked) {
-    return `<div class="habit-row habit-locked">
-      <div class="habit-info"><div class="habit-name">${sg.name}</div><div class="habit-type">unlocks day ${sg.unlockDay}</div></div>
-      <span class="lock-badge">🔒 day ${sg.unlockDay}</span>
-    </div>`;
-  }
+  const log = getLog(sg.id, selectedDate);
+  if (locked) return ''; // inactive habits don't appear on the main page — activate them in Goals
   if (sg.type === 'bool') {
     const isDone = log.status === 'done';
     const isSkip = log.status === 'skipped';
@@ -833,7 +1814,7 @@ function togglePillar(pid) {
 }
 
 function markDone(sgId, pid, name) {
-  setLog(sgId, today(), {status:'done'});
+  setLog(sgId, selectedDate, {status:'done'});
   const db = document.getElementById('done-'+sgId);
   const sb = document.getElementById('skip-'+sgId);
   if(db){ db.classList.add('done'); sb.classList.remove('skipped'); }
@@ -843,7 +1824,7 @@ function markDone(sgId, pid, name) {
 }
 
 function markSkip(sgId, pid, name) {
-  setLog(sgId, today(), {status:'skipped'});
+  setLog(sgId, selectedDate, {status:'skipped'});
   const db = document.getElementById('done-'+sgId);
   const sb = document.getElementById('skip-'+sgId);
   if(db){ db.classList.remove('done'); sb.classList.add('skipped'); }
@@ -855,7 +1836,7 @@ function markSkip(sgId, pid, name) {
 
 function logNum(sgId, pid, val) {
   const v = parseFloat(val) || 0;
-  setLog(sgId, today(), {value:v, status: v>0?'done':'pending'});
+  setLog(sgId, selectedDate, {value:v, status: v>0?'done':'pending'});
   updatePillarProgress(pid);
   if (v === 0) showBanner(pid, rand(MOTIV_PARTIAL), 'mb-partial');
   else hideBanner(pid);
@@ -878,24 +1859,25 @@ function updatePillarProgress(pid) {
   if(!pillar) return;
   const active = pillar.subgoals.filter(sg=>!isLocked(sg));
   const doneCt = active.filter(sg=>{
-    const log=getLog(sg.id,today());
+    const log=getLog(sg.id,selectedDate);
     return sg.type==='bool'?log.status==='done':log.value>0;
   }).length;
   const pct = active.length ? Math.round(doneCt/active.length*100) : 0;
   const pf = document.getElementById('prog-'+pid);
   const ps = document.getElementById('psub-'+pid);
   if(pf) pf.style.width = pct+'%';
-  if(ps) ps.textContent = doneCt+'/'+active.length+' done today';
-  document.getElementById('streak-display').textContent = '🔥 '+calculateStreak()+' days';
+  if(ps) ps.textContent = doneCt+'/'+active.length+' done'+(isEditingPast()?'':' today');
+  refreshCounter();
 }
 
 function checkAllDone() {
+  if (isEditingPast()) return; // no reward popups when editing a past day
   let total=0, done=0;
   state.pillars.forEach(p=>{
     const active=p.subgoals.filter(sg=>!isLocked(sg));
     total+=active.length;
     active.forEach(sg=>{
-      const log=getLog(sg.id,today());
+      const log=getLog(sg.id,selectedDate);
       if(sg.type==='bool'?log.status==='done':log.value>0) done++;
     });
   });
@@ -903,10 +1885,7 @@ function checkAllDone() {
 }
 
 function showReward() {
-  const streak = calculateStreak()+1;
-  document.getElementById('reward-msg').textContent = streak > 1
-    ? `${streak}-day streak! You're building something real.`
-    : 'All done for today. Every done day compounds.';
+  document.getElementById('reward-msg').textContent = 'All done today. Every day you show up compounds into something real.';
   document.getElementById('reward-overlay').classList.add('show');
 }
 function closeReward() { document.getElementById('reward-overlay').classList.remove('show'); }
@@ -936,24 +1915,46 @@ function nightNo() {
 
 // PROGRESS SCREEN
 function renderProgress() {
-  const days = ['M','T','W','T','F','S','S'];
-  const todayDow = (new Date().getDay()+6)%7;
+  const dayLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const mon = currentWeekMonday();
+  const wd = weekDates(mon);
+
+  // Week heading: range + week number
+  const wkHead = document.getElementById('week-heading');
+  if (wkHead) wkHead.innerHTML = `Week ${isoWeekNum(mon)} · ${weekLabel(mon)}`;
+
   let html = '';
-  for(let i=6;i>=0;i--){
-    const d = daysAgo(i);
+  wd.forEach((d, idx) => {
     const comp = getDayCompletion(d);
-    const cls = comp>=0.8?'full':comp>=0.3?'partial':'empty';
-    const isToday = i===0;
-    const dayLabel = days[(todayDow-i+7)%7];
-    html += `<div class="wday ${cls}${isToday?' today':''}"><span>${dayLabel}</span><span class="dl">${Math.round(comp*100)}%</span></div>`;
-  }
+    const isFuture = d > today();
+    const cls = isFuture ? 'empty' : (comp>=0.8?'full':comp>=0.3?'partial':'empty');
+    const isToday = d === today();
+    const tappable = !isFuture;
+    const dateNum = new Date(d+'T00:00:00').getDate();
+    html += `<div class="wday ${cls}${isToday?' today':''}" ${tappable?`onclick="editDay('${d}')" style="cursor:pointer;"`:''}>
+      <span class="wd-name">${dayLabels[idx]}</span>
+      <span class="wd-date">${dateNum}</span>
+      <span class="dl">${isFuture?'–':Math.round(comp*100)+'%'}</span>
+    </div>`;
+  });
   document.getElementById('week-dots').innerHTML = html;
+
+  // hint
+  let hint = document.getElementById('edit-hint');
+  if (!hint) {
+    hint = document.createElement('div');
+    hint.id = 'edit-hint';
+    hint.style.cssText = 'font-size:11px;color:var(--text3);margin:-8px 0 14px;';
+    document.getElementById('week-dots').after(hint);
+  }
+  hint.textContent = 'Tap any day to fill in or fix what you logged. Editable until next Monday.';
 
   let barsHtml = '';
   state.pillars.forEach(p=>{
     let weekTotal=0;
-    for(let i=0;i<7;i++) weekTotal+=getPillarCompletion(p,daysAgo(i));
-    const pct = Math.round(weekTotal/7*100);
+    wd.forEach(d => { if (d <= today()) weekTotal+=getPillarCompletion(p,d); });
+    const daysCounted = wd.filter(d=>d<=today()).length || 1;
+    const pct = Math.round(weekTotal/daysCounted*100);
     barsHtml += `<div class="pillar-bar-row">
       <div class="pb-name">${p.icon} ${p.name}</div>
       <div class="pb-track"><div class="pb-fill" style="width:${pct}%;background:${p.color};"></div></div>
@@ -963,18 +1964,614 @@ function renderProgress() {
   document.getElementById('pillar-bars').innerHTML = barsHtml;
 
   const scores = state.pillars.map(p=>{
-    let t=0; for(let i=0;i<7;i++) t+=getPillarCompletion(p,daysAgo(i));
-    return {name:p.name,score:t/7};
+    let t=0,c=0; wd.forEach(d=>{ if(d<=today()){t+=getPillarCompletion(p,d);c++;} });
+    return {name:p.name,score:c?t/c:0};
   });
   const lowest = scores.sort((a,b)=>a.score-b.score)[0];
-  document.getElementById('insight-box').innerHTML = `💡 <strong>${lowest.name}</strong> is your lowest pillar this week at ${Math.round(lowest.score*100)}%. Give it a little extra attention tomorrow.`;
+  document.getElementById('insight-box').innerHTML = `💡 <strong>${lowest.name}</strong> is your lowest pillar this week at ${Math.round(lowest.score*100)}%. Give it a little extra attention.`;
 
   const statsHtml = `
     <div class="stat-box"><div class="stat-num" style="color:var(--green);">${Math.round(getDayCompletion(today())*100)}%</div><div class="stat-lbl">Today</div></div>
-    <div class="stat-box"><div class="stat-num" style="color:var(--accent);">${calculateStreak()}</div><div class="stat-lbl">Streak</div></div>
-    <div class="stat-box"><div class="stat-num" style="color:var(--amber);">${getDaysSinceStart()}</div><div class="stat-lbl">Days in</div></div>`;
+    <div class="stat-box"><div class="stat-num" style="color:var(--accent);">${daysLoggedCount()}</div><div class="stat-lbl">Days logged</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--amber);">${Object.keys(state.weeklyReports||{}).length}</div><div class="stat-lbl">Reports saved</div></div>`;
   document.getElementById('habit-stats').innerHTML = statsHtml;
+
+  renderSundayBanner();
+  renderProgressFoodGlance();
+  renderReportArea();
+  renderReportHistory();
 }
+
+function renderProgressFoodGlance() {
+  const wrap = document.getElementById('progress-food-glance');
+  if (!wrap) return;
+  if (!state.foodEnabled) { wrap.innerHTML = ''; return; }
+  const wd = weekDates(currentWeekMonday());
+  const todayS = today();
+  let total=0, done=0;
+  wd.forEach(d => { if (d>todayS) return; MEAL_SLOTS.forEach(s=>{ total++; if(isMealDone(d,s.key)) done++; }); });
+  const pct = total ? Math.round(done/total*100) : 0;
+  wrap.innerHTML = `
+    <div class="sec-label" style="margin-top:16px;">🍽️ Food this week</div>
+    <div class="food-ring-row">
+      ${ringChart(pct,'var(--green)')}
+      <div class="food-ring-stats">
+        <div><strong>${done}/${total}</strong> meals followed</div>
+        <div style="color:var(--text3);">Full day-by-day view in the Food tab</div>
+      </div>
+    </div>`;
+}
+
+// ========== SUNDAY WEEKLY JOURNAL ==========
+
+function editDay(d) {
+  selectedDate = d;
+  renderToday();
+  switchScreen('today', document.querySelectorAll('.nav-btn')[0]);
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  document.getElementById('today-body').scrollTop = 0;
+}
+
+// Build a stats snapshot for a given week (Mon..Sun)
+function buildWeekSnapshot(mondayStr) {
+  const wd = weekDates(mondayStr);
+  const todayS = today();
+  // Per-habit stats — only locked-in (active) habits appear in reports
+  const habitStats = [];
+  state.pillars.forEach(p => {
+    p.subgoals.forEach(sg => {
+      if (isLocked(sg)) return;
+      let boolDone = 0, numTotal = 0, daysCounted = 0;
+      wd.forEach(d => {
+        if (d > todayS) return;
+        daysCounted++;
+        const log = getLog(sg.id, d);
+        if (sg.type === 'bool') { if (log.status === 'done') boolDone++; }
+        else { numTotal += (log.value || 0); }
+      });
+      habitStats.push({
+        id: sg.id, pillarName: p.name, name: sg.name, type: sg.type, unit: sg.unit || '',
+        boolDone, numTotal, daysCounted
+      });
+    });
+  });
+  // Per-pillar %
+  const pillarPct = {};
+  state.pillars.forEach(p => {
+    let t=0,c=0; wd.forEach(d=>{ if(d<=todayS){t+=getPillarCompletion(p,d);c++;} });
+    pillarPct[p.name] = c ? Math.round(t/c*100) : 0;
+  });
+  // Overall
+  let ot=0, oc=0; wd.forEach(d=>{ if(d<=todayS){ot+=getDayCompletion(d);oc++;} });
+  const overallPct = oc ? Math.round(ot/oc*100) : 0;
+  // Food summary for the week
+  let foodTotal=0, foodDone=0;
+  const wdF = weekDates(mondayStr);
+  wdF.forEach(d => {
+    if (d > todayS) return;
+    MEAL_SLOTS.forEach(s => { foodTotal++; if (isMealDone(d, s.key)) foodDone++; });
+  });
+  const foodPct = foodTotal ? Math.round(foodDone/foodTotal*100) : 0;
+
+  return { habitStats, pillarPct, overallPct, foodPct, foodDone, foodTotal };
+}
+
+function fmtHabitStat(h) {
+  if (h.type === 'bool') return `${h.boolDone}/${h.daysCounted} days`;
+  return `${h.numTotal} ${h.unit} total`;
+}
+
+// Render the Sunday journal area (live current week)
+function renderReportArea() {
+  const area = document.getElementById('report-area');
+  if (!state.metricDefs) state.metricDefs = [
+    {id:'m_weight', name:'Weight', unit:'kg'},
+    {id:'m_income', name:'Income this week', unit:'₹'},
+    {id:'m_mood',   name:'Mood / energy', unit:'/10'},
+    {id:'m_waist',  name:'Waist', unit:'cm'},
+  ];
+  const mon = currentWeekMonday();
+  const snap = buildWeekSnapshot(mon);
+  const prevMon = previousWeekMonday();
+  const prevReport = state.weeklyReports[prevMon];
+  const saved = state.weeklyReports[mon];
+  const wd = weekDates(mon);
+  const dayShort = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  // Comparison vs previous saved week
+  function trendFor(name, val) {
+    if (!prevReport) return '';
+    const prev = prevReport.snapshot.pillarPct[name];
+    if (prev === undefined) return '';
+    const diff = val - prev;
+    if (diff > 0) return `<span class="trend-up">↑ ${diff}%</span>`;
+    if (diff < 0) return `<span class="trend-dn">↓ ${Math.abs(diff)}%</span>`;
+    return `<span style="color:var(--text3);">→ same</span>`;
+  }
+
+  // Per-day chart for the whole week
+  let chartBars = wd.map((d, idx) => {
+    const isFuture = d > today();
+    const comp = isFuture ? 0 : getDayCompletion(d);
+    const h = Math.max(4, Math.round(comp*46));
+    const col = comp>=0.8?'var(--green)':comp>=0.3?'var(--green2)':'var(--bg4)';
+    return `<div class="bar-col">
+      <div class="mini-bar" style="height:${h}px;background:${col};"></div>
+      <div class="bar-label">${dayShort[idx][0]}</div>
+    </div>`;
+  }).join('');
+
+  // Per-day notes — read-only here (edit them on each day's page)
+  let dayNotesHtml = wd.map((d, idx) => {
+    if (d > today()) return '';
+    const note = getDayNote(d);
+    if (!note) return '';
+    const dateNum = new Date(d+'T00:00:00').getDate();
+    return `<div class="day-note-row">
+      <div class="day-note-label">${dayShort[idx]} ${dateNum}</div>
+      <div class="day-note-ro">${note}</div>
+    </div>`;
+  }).join('');
+
+  let ateNotesHtml = wd.map((d, idx) => {
+    if (d > today()) return '';
+    const note = getAteNote(d);
+    if (!note) return '';
+    const dateNum = new Date(d+'T00:00:00').getDate();
+    return `<div class="day-note-row">
+      <div class="day-note-label">${dayShort[idx]} ${dateNum}</div>
+      <div class="day-note-ro">${note}</div>
+    </div>`;
+  }).join('');
+
+  let habitsHtml = snap.habitStats.map(h =>
+    `<div class="rp-stat-row"><span>${h.name}</span><strong>${fmtHabitStat(h)}</strong></div>`
+  ).join('');
+
+  // Metrics — read-only here, values come from Metrics tab (with carry-forward)
+  let metricsHtml = state.metricDefs.map(m => {
+    const r = metricValueWithCarry(m.id, mon);
+    const valStr = r.value !== undefined ? `${r.value} ${m.unit}` : '–';
+    const carryTag = r.carried ? ` <span style="font-size:10px;color:var(--text3);">(from week ${isoWeekNum(r.from)})</span>` : '';
+    return `<div class="rp-stat-row"><span>${m.name}</span><strong>${valStr}${carryTag}</strong></div>`;
+  }).join('');
+
+  const weekNote = (state.weekNotes && state.weekNotes[mon]) || '';
+  const sundayQuote = rand(SUNDAY_QUOTES);
+
+  area.innerHTML = `
+    <div class="report-pillar">
+      <div class="rp-head">
+        <div class="rp-name">Week ${isoWeekNum(mon)} · ${weekLabel(mon)}</div>
+        <div class="rp-trend">${snap.overallPct}% overall</div>
+      </div>
+      <div style="font-size:12px;color:var(--text2);font-style:italic;margin-bottom:14px;line-height:1.6;">"${sundayQuote}"</div>
+
+      <div class="rp-sub-label">Each day this week</div>
+      <div class="chart-bars" style="height:60px;margin-bottom:14px;">${chartBars}</div>
+
+      <div class="rp-sub-label">Pillars vs last week</div>
+      ${state.pillars.map(p=>`<div class="rp-stat-row"><span>${p.icon} ${p.name}</span><strong>${snap.pillarPct[p.name]}% ${trendFor(p.name, snap.pillarPct[p.name])}</strong></div>`).join('')}
+
+      <div class="rp-sub-label" style="margin-top:12px;">Active habits this week</div>
+      ${habitsHtml || '<div style="font-size:12px;color:var(--text3);">No active habits yet.</div>'}
+
+      <div class="rp-sub-label" style="margin-top:12px;">📊 Metrics <span style="text-transform:none;letter-spacing:0;">(edit in the Metrics tab)</span></div>
+      ${metricsHtml || '<div style="font-size:12px;color:var(--text3);">No metrics yet. Add some in Goals → Metrics.</div>'}
+
+      <div class="rp-sub-label" style="margin-top:12px;">Day notes <span style="text-transform:none;letter-spacing:0;">(written on each day's page)</span></div>
+      ${dayNotesHtml || '<div style="font-size:12px;color:var(--text3);">No day notes this week yet. Add them at the bottom of the Today page.</div>'}
+
+      ${state.foodEnabled ? `<div class="rp-sub-label" style="margin-top:12px;">🍽️ What I actually ate this week</div>
+      ${ateNotesHtml || '<div style="font-size:12px;color:var(--text3);">No food notes yet. Add them in the food section on the Today page.</div>'}` : ''}
+
+      <div class="rp-sub-label" style="margin-top:12px;">Note for this week (editable here)</div>
+      <textarea class="week-note" id="week-note" placeholder="How was this week overall? e.g. 'Hectic — baby was unwell' or 'period week, took it easy'." onchange="saveWeekNote(this.value)">${weekNote}</textarea>
+      <div style="font-size:11px;color:var(--text3);margin-top:8px;">💾 This report saves itself automatically when the new week starts on Monday — nothing for you to do.</div>
+    </div>`;
+}
+
+function saveWeekNote(val) {
+  if (!state.weekNotes) state.weekNotes = {};
+  const mon = currentWeekMonday();
+  if (val.trim()) state.weekNotes[mon] = val.trim();
+  else delete state.weekNotes[mon];
+  save();
+}
+
+// Per-day notes stored separately from habit logs
+function getDayNote(d) { return (state.dayNotes && state.dayNotes[d]) || ''; }
+function saveDayNote(d, val) {
+  if (!state.dayNotes) state.dayNotes = {};
+  if (val.trim()) state.dayNotes[d] = val.trim();
+  else delete state.dayNotes[d];
+  save();
+}
+
+// ===== METRICS =====
+function setMetricVal(mid, val) {
+  const mon = currentWeekMonday();
+  if (!state.metricLogs) state.metricLogs = {};
+  if (!state.metricLogs[mon]) state.metricLogs[mon] = {};
+  const v = parseFloat(val);
+  if (val === '' || isNaN(v)) delete state.metricLogs[mon][mid];
+  else state.metricLogs[mon][mid] = v;
+  save();
+}
+
+// Value for a metric in a given week, falling back to the most recent earlier week
+function metricValueWithCarry(mid, mon) {
+  const logs = state.metricLogs || {};
+  if (logs[mon] && logs[mon][mid] !== undefined) return { value: logs[mon][mid], carried: false };
+  const earlier = Object.keys(logs).filter(k => k < mon).sort().reverse();
+  for (const k of earlier) {
+    if (logs[k][mid] !== undefined) return { value: logs[k][mid], carried: true, from: k };
+  }
+  return { value: undefined, carried: false };
+}
+
+// All metric values for a week (with carry-forward), as {id: value}
+function metricsForWeek(mon) {
+  const out = {};
+  (state.metricDefs || []).forEach(m => {
+    const r = metricValueWithCarry(m.id, mon);
+    if (r.value !== undefined) out[m.id] = r.value;
+  });
+  return out;
+}
+
+function renderMetrics() {
+  const mon = currentWeekMonday();
+  const line = document.getElementById('metrics-week-line');
+  if (line) line.textContent = 'Week ' + isoWeekNum(mon) + ' · ' + weekLabel(mon);
+  renderGrocery();
+  const list = document.getElementById('metrics-list');
+  if (!list) return;
+  list.innerHTML = (state.metricDefs || []).map(m => {
+    const thisWeek = (state.metricLogs[mon]||{})[m.id];
+    const carry = metricValueWithCarry(m.id, mon);
+    let subline = '';
+    if (thisWeek !== undefined) subline = 'Logged this week';
+    else if (carry.value !== undefined) subline = `Carrying forward: ${carry.value} ${m.unit} (week ${isoWeekNum(carry.from)})`;
+    else subline = 'No entry yet';
+    return `<div class="card" style="padding:13px 16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;color:var(--text);">${m.name}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:2px;">${subline}</div>
+        </div>
+        <div class="num-row">
+          <input class="num-in" style="width:84px;" type="number" step="any" value="${thisWeek!==undefined?thisWeek:''}" placeholder="${carry.value!==undefined?carry.value:'–'}" onchange="setMetricVal('${m.id}', this.value); renderMetrics();">
+          <span class="unit-lbl">${m.unit}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== GROCERY (read-only, current meal-week) =====
+function renderGrocery() {
+  const wrap = document.getElementById('grocery-list');
+  if (!wrap) return;
+  const wk = mealWeekForDate(today());
+  const g = GROCERY[wk];
+  function orderCard(o) {
+    const cats = Object.keys(o.cats).map(cat =>
+      `<div class="groc-cat"><div class="groc-cat-name">${cat}</div><div class="groc-items">${o.cats[cat]}</div></div>`
+    ).join('');
+    return `<div class="card" style="padding:14px 16px;margin-bottom:10px;">
+      <div class="groc-title">${o.title}</div>${cats}</div>`;
+  }
+  wrap.innerHTML = `<div style="font-size:11px;color:var(--text3);margin-bottom:8px;">This week's grocery — two orders.</div>${orderCard(g.o1)}${orderCard(g.o2)}`;
+}
+
+// ===== FOOD WEEK TAB =====
+function renderFoodWeek() {
+  const line = document.getElementById('food-week-line');
+  if (line) line.textContent = weekLabel(currentWeekMonday());
+  renderFoodProgress();
+  renderFoodDayDetail();
+  // This week's "what I ate" notes
+  const wrap = document.getElementById('food-ate-notes');
+  if (wrap) {
+    const wd = weekDates(currentWeekMonday());
+    const dayShort = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    const rows = wd.map((d,idx)=>{
+      if (d > today()) return '';
+      const note = getAteNote(d);
+      const dateNum = new Date(d+'T00:00:00').getDate();
+      return `<div class="day-note-row">
+        <div class="day-note-label">${dayShort[idx]} ${dateNum}</div>
+        <div class="day-note-ro">${note || '<span style="opacity:0.4;">—</span>'}</div>
+      </div>`;
+    }).join('');
+    wrap.innerHTML = `<div class="card" style="padding:12px 16px;">${rows}</div>`;
+  }
+}
+
+// ===== FOOD PROGRESS (rendered inside the Food tab) =====
+function renderFoodProgress() {
+  const wrap = document.getElementById('food-progress');
+  if (!wrap) return;
+  const wd = weekDates(currentWeekMonday());
+  const todayS = today();
+  let totalMeals = 0, doneMeals = 0, perfectDays = 0;
+  const perType = {}; MEAL_SLOTS.forEach(s=>perType[s.key]=0);
+  wd.forEach(d => {
+    if (d > todayS) return;
+    let dayDone = 0;
+    MEAL_SLOTS.forEach(s => {
+      totalMeals++;
+      if (isMealDone(d, s.key)) { doneMeals++; dayDone++; perType[s.key]++; }
+    });
+    if (dayDone === 5) perfectDays++;
+  });
+  const pct = totalMeals ? Math.round(doneMeals/totalMeals*100) : 0;
+
+  // day grid (clickable — taps update the detail panel below)
+  const dayShort = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  let grid = wd.map((d,idx)=>{
+    const isFuture = d > todayS;
+    const c = isFuture ? 0 : MEAL_SLOTS.filter(s=>isMealDone(d,s.key)).length;
+    const cls = isFuture ? 'empty' : (c===5?'full':c>0?'partial':'empty');
+    const sel = (d === foodSelectedDay) ? ' fsel' : '';
+    return `<div class="fday ${cls}${sel}" onclick="selectFoodDay('${d}')" style="cursor:pointer;">
+      <span>${dayShort[idx][0]}</span><span class="fd-x">${isFuture?'–':c+'/5'}</span></div>`;
+  }).join('');
+
+  // per meal-type bars
+  let typeBars = MEAL_SLOTS.map(s=>{
+    const c = perType[s.key];
+    return `<div class="pillar-bar-row">
+      <div class="pb-name" style="width:110px;">${s.label}</div>
+      <div class="pb-track"><div class="pb-fill" style="width:${Math.round(c/7*100)}%;background:${s.color};"></div></div>
+      <div class="pb-pct">${c}/7</div>
+    </div>`;
+  }).join('');
+
+  wrap.innerHTML = `
+    <div class="food-ring-row">
+      ${ringChart(pct, 'var(--green)')}
+      <div class="food-ring-stats">
+        <div><strong>${doneMeals}</strong> meals followed</div>
+        <div><strong>${totalMeals-doneMeals}</strong> not yet ticked</div>
+        <div><strong>${perfectDays}</strong> perfect days (all 5)</div>
+      </div>
+    </div>
+    <div class="rp-sub-label" style="margin-top:12px;">Each day — tap to see that day below</div>
+    <div class="food-day-grid">${grid}</div>
+    <div class="rp-sub-label" style="margin-top:10px;">By meal type (days ticked)</div>
+    ${typeBars}`;
+}
+
+// SVG ring/donut chart showing a percentage
+function ringChart(pct, color) {
+  const r = 34, c = 2*Math.PI*r, off = c*(1-pct/100);
+  return `<svg width="92" height="92" viewBox="0 0 92 92" class="ring-svg">
+    <circle cx="46" cy="46" r="${r}" fill="none" stroke="var(--bg4)" stroke-width="9"/>
+    <circle cx="46" cy="46" r="${r}" fill="none" stroke="${color}" stroke-width="9"
+      stroke-dasharray="${c}" stroke-dashoffset="${off}" stroke-linecap="round"
+      transform="rotate(-90 46 46)"/>
+    <text x="46" y="51" text-anchor="middle" font-size="20" font-weight="700" fill="var(--text)" font-family="Syne, sans-serif">${pct}%</text>
+  </svg>`;
+}
+
+// Tap a day in the Food tab → show that day's meal-by-meal status below
+let foodSelectedDay = null;
+function selectFoodDay(d) {
+  foodSelectedDay = d;
+  renderFoodProgress();
+  renderFoodDayDetail();
+}
+
+function renderFoodDayDetail() {
+  const wrap = document.getElementById('food-day-detail');
+  if (!wrap) return;
+  const d = foodSelectedDay || today();
+  if (d > today()) { wrap.innerHTML = ''; return; }
+  const data = mealDataForDate(d);
+  const dateObj = new Date(d+'T00:00:00');
+  const label = dateObj.toLocaleDateString('en-GB',{weekday:'long', day:'numeric', month:'short'});
+  const rows = MEAL_SLOTS.map(s=>{
+    const meal = data.meals[s.key];
+    const done = isMealDone(d, s.key);
+    return `<div class="fdd-row">
+      <div class="fdd-check ${done?'on':''}">${done?'✓':'○'}</div>
+      <div style="flex:1;min-width:0;">
+        <div class="fdd-slot">${s.label}</div>
+        <div class="fdd-name ${done?'fdd-done':''}">${meal.name}</div>
+      </div>
+    </div>`;
+  }).join('');
+  const ate = getAteNote(d);
+  wrap.innerHTML = `
+    <div class="card" style="padding:14px 16px;">
+      <div class="fdd-title">${label} · ${mealsDoneCount(d)}/5 done</div>
+      ${rows}
+      ${ate?`<div class="fdd-ate">📝 Ate: ${ate}</div>`:''}
+    </div>`;
+}
+
+// ===== FOOD TIPS (for the Drive tab) =====
+function renderFoodTips() {
+  const wrap = document.getElementById('food-tips');
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <div class="disc-section">
+      <div class="disc-title">🍽️ Food non-negotiables</div>
+      <div class="disc-body">${FOOD_TIPS.nonneg.map(t=>`• ${t}`).join('<br>')}</div>
+    </div>
+    <div class="disc-section">
+      <div class="disc-title">🎯 Goals this food plan supports</div>
+      <div class="disc-body">${FOOD_TIPS.goals.map(t=>`• ${t}`).join('<br>')}</div>
+    </div>`;
+}
+// that hasn't been saved yet (with whatever data it has — even zero progress).
+function autoSaveMissedWeeks() {
+  if (!state.weekNotes) state.weekNotes = {};
+  let mon = previousWeekMonday();
+  for (let i = 0; i < 26; i++) { // look back up to ~6 months
+    const sundayOfWeek = weekDates(mon)[6];
+    if (state.appStartDate > sundayOfWeek) break; // app didn't exist yet
+    if (!state.weeklyReports[mon]) {
+      state.weeklyReports[mon] = {
+        generatedAt: new Date().toISOString(),
+        note: state.weekNotes[mon] || '',
+        metrics: metricsForWeek(mon),
+        snapshot: buildWeekSnapshot(mon),
+        metricDefsSnapshot: JSON.parse(JSON.stringify(state.metricDefs)),
+        auto: true
+      };
+    }
+    const d = new Date(mon+'T00:00:00'); d.setDate(d.getDate()-7); mon = dateStr(d);
+  }
+  save();
+}
+
+function renderReportHistory() {
+  const wrap = document.getElementById('report-history');
+  const keys = Object.keys(state.weeklyReports).sort(); // chronological
+  if (!keys.length) {
+    wrap.innerHTML = `<div style="font-size:12px;color:var(--text3);padding:8px 0;">No saved reports yet. Your first report saves automatically when next week starts.</div>`;
+    return;
+  }
+  // Overall % trend line across weeks
+  const pts = keys.map((k,i)=>({x:i, y:state.weeklyReports[k].snapshot.overallPct, label:weekLabel(k)}));
+  let spark = renderSparkline(pts);
+
+  let list = keys.slice().reverse().map((k,idx) => {
+    const r = state.weeklyReports[k];
+    const wnum = keys.indexOf(k)+1;
+    return `<div class="hist-card">
+      <div class="hist-head">
+        <div><strong>Week ${wnum}</strong> <span style="color:var(--text3);font-size:11px;">${weekLabel(k)}</span></div>
+        <div style="color:var(--green);font-weight:600;">${r.snapshot.overallPct}%</div>
+      </div>
+      ${r.note?`<div class="hist-note">"${r.note}"</div>`:''}
+      <button class="hist-compare-btn" onclick="openCompare('${k}')">Compare with another week →</button>
+    </div>`;
+  }).join('');
+
+  wrap.innerHTML = `
+    <div class="report-pillar" style="margin-bottom:10px;">
+      <div class="rp-sub-label">Overall % across all saved weeks</div>
+      ${spark}
+    </div>
+    ${list}`;
+}
+
+function renderSparkline(pts) {
+  if (pts.length < 2) return `<div style="font-size:11px;color:var(--text3);">Save at least 2 weeks to see a trend line.</div>`;
+  const W=280, H=70, pad=8;
+  const xs = pts.map(p=>p.x), ys = pts.map(p=>p.y);
+  const minY=0, maxY=100;
+  const sx = i => pad + (i/(pts.length-1))*(W-2*pad);
+  const sy = v => H-pad - ((v-minY)/(maxY-minY))*(H-2*pad);
+  let d = pts.map((p,i)=>`${i===0?'M':'L'}${sx(i).toFixed(1)},${sy(p.y).toFixed(1)}`).join(' ');
+  let dots = pts.map((p,i)=>`<circle cx="${sx(i).toFixed(1)}" cy="${sy(p.y).toFixed(1)}" r="3" fill="var(--accent)"/>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;">
+    <path d="${d}" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+    ${dots}
+  </svg>`;
+}
+
+let compareFirst = null;
+function openCompare(weekKey) {
+  compareFirst = weekKey;
+  const keys = Object.keys(state.weeklyReports).sort();
+  const sheet = document.getElementById('compare-sheet');
+  const options = keys.filter(k=>k!==weekKey).map(k=>{
+    const wnum = keys.indexOf(k)+1;
+    return `<button class="compare-pick" onclick="doCompare('${weekKey}','${k}')">Week ${wnum} · ${weekLabel(k)}</button>`;
+  }).join('');
+  const wnum = keys.indexOf(weekKey)+1;
+  sheet.innerHTML = `
+    <div class="sheet-title">Compare Week ${wnum}</div>
+    <div class="sheet-sub">${weekLabel(weekKey)} — pick a week to compare against:</div>
+    ${options || '<div style="color:var(--text3);font-size:12px;">Save more weeks first.</div>'}
+    <button class="sheet-btn btn-secondary" style="margin-top:8px;" onclick="closeCompare()">Cancel</button>`;
+  document.getElementById('compare-overlay').classList.add('show');
+}
+
+function doCompare(kA, kB) {
+  const keys = Object.keys(state.weeklyReports).sort();
+  const a = state.weeklyReports[kA], b = state.weeklyReports[kB];
+  const aNum = keys.indexOf(kA)+1, bNum = keys.indexOf(kB)+1;
+  const sheet = document.getElementById('compare-sheet');
+
+  // Pillars side by side
+  let pillarRows = state.pillars.map(p=>{
+    const av = a.snapshot.pillarPct[p.name] ?? 0;
+    const bv = b.snapshot.pillarPct[p.name] ?? 0;
+    return `<div class="cmp-row"><span>${p.icon} ${p.name}</span><span>${av}%</span><span>${bv}%</span></div>`;
+  }).join('');
+
+  // Metrics side by side — use CURRENT metric names so renames reflect everywhere
+  const snapDefs = b.metricDefsSnapshot || a.metricDefsSnapshot || [];
+  const ids = new Set([...(state.metricDefs||[]).map(m=>m.id), ...snapDefs.map(m=>m.id)]);
+  let metricRows = Array.from(ids).map(id=>{
+    const cur = (state.metricDefs||[]).find(m=>m.id===id) || snapDefs.find(m=>m.id===id);
+    if (!cur) return '';
+    const av = a.metrics && a.metrics[id]!==undefined ? a.metrics[id] : '–';
+    const bv = b.metrics && b.metrics[id]!==undefined ? b.metrics[id] : '–';
+    if (av==='–' && bv==='–') return '';
+    return `<div class="cmp-row"><span>${cur.name}</span><span>${av}${av!=='–'?' '+cur.unit:''}</span><span>${bv}${bv!=='–'?' '+cur.unit:''}</span></div>`;
+  }).join('');
+
+  sheet.innerHTML = `
+    <div class="sheet-title">Week ${aNum} vs Week ${bNum}</div>
+    <div class="cmp-row cmp-head"><span></span><span>W${aNum}</span><span>W${bNum}</span></div>
+    <div class="cmp-row"><span><strong>Overall</strong></span><span>${a.snapshot.overallPct}%</span><span>${b.snapshot.overallPct}%</span></div>
+    <div class="rp-sub-label" style="margin-top:10px;">Pillars</div>
+    ${pillarRows}
+    <div class="rp-sub-label" style="margin-top:10px;">Your numbers</div>
+    ${metricRows}
+    ${a.note||b.note?`<div class="rp-sub-label" style="margin-top:10px;">Notes</div>
+      <div class="cmp-note"><strong>W${aNum}:</strong> ${a.note||'—'}</div>
+      <div class="cmp-note"><strong>W${bNum}:</strong> ${b.note||'—'}</div>`:''}
+    <button class="sheet-btn btn-primary" style="margin-top:12px;" onclick="closeCompare()">Done</button>`;
+}
+function closeCompare() { document.getElementById('compare-overlay').classList.remove('show'); }
+
+// Compare two weeks by their week NUMBER (1 = first saved week, etc.)
+function compareByNumber() {
+  const keys = Object.keys(state.weeklyReports).sort();
+  const msg = document.getElementById('cmp-search-msg');
+  const aNum = parseInt(document.getElementById('cmp-week-a').value);
+  const bNum = parseInt(document.getElementById('cmp-week-b').value);
+  if (!aNum || !bNum) { msg.textContent = 'Enter two week numbers (e.g. 1 and 8).'; msg.style.color='var(--red)'; return; }
+  if (aNum < 1 || bNum < 1 || aNum > keys.length || bNum > keys.length) {
+    msg.textContent = `You have ${keys.length} saved week${keys.length===1?'':'s'} so far (numbered 1–${keys.length}).`;
+    msg.style.color='var(--red)'; return;
+  }
+  if (aNum === bNum) { msg.textContent = 'Pick two different weeks.'; msg.style.color='var(--red)'; return; }
+  msg.textContent=''; 
+  doCompare(keys[aNum-1], keys[bNum-1]);
+}
+
+// Sunday banner + auto open
+function renderSundayBanner() {
+  const banner = document.getElementById('sunday-banner');
+  if (!banner) return;
+  if (isSunday()) {
+    const q = rand(SUNDAY_QUOTES);
+    banner.innerHTML = `<div class="sunday-card">
+      <div style="font-size:13px;font-weight:600;color:var(--amber);margin-bottom:4px;">☀️ Happy Sunday, ${state.userName}</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6;">Today is your rest day — it won't count against your progress. Scroll down to see your full week and write your journal note for the week.</div>
+    </div>`;
+  } else {
+    banner.innerHTML = '';
+  }
+}
+
+const SUNDAY_QUOTES = [
+  "A new week is a fresh page. Write it kindly.",
+  "Rest is part of the work. You earned today.",
+  "Progress isn't always loud. Some weeks you just hold the line — that counts.",
+  "Look how far you've come, not just how far is left.",
+  "Every Sunday is a small reset. Begin again, gently.",
+  "You're not behind. You're exactly where your effort has brought you."
+];
 
 // REMINDERS SCREEN
 function renderReminders() {
@@ -1027,8 +2624,16 @@ function scheduleReminder(r) {
 
 // EDIT GOALS
 let editState = null;
+let editMetrics = null;
 function renderEditGoals() {
+  // INIT: copy from saved state (only on entering the screen)
   editState = JSON.parse(JSON.stringify(state.pillars));
+  editMetrics = JSON.parse(JSON.stringify(state.metricDefs || []));
+  renderEditList();
+}
+
+// RENDER: draws from current editState WITHOUT resetting it (fixes reorder bug)
+function renderEditList() {
   const c = document.getElementById('edit-pillars-container');
   c.innerHTML = '';
   editState.forEach((p,pi) => {
@@ -1047,15 +2652,145 @@ function renderEditGoals() {
       <button class="add-habit-btn" onclick="addHabit(${pi})">＋ Add sub-goal / habit</button>`;
     c.appendChild(div);
   });
+
+  // Metrics editor section
+  const mc = document.getElementById('edit-metrics-container');
+  if (mc) {
+    mc.innerHTML = `<div class="edit-pillar">
+      <div class="edit-ph"><span style="font-size:18px;">📊</span><span class="edit-ph-input" style="pointer-events:none;">Metrics</span></div>
+      ${editMetrics.map((m,mi)=>`
+        <div class="edit-habit-row">
+          <input class="edit-name-in" value="${m.name}" id="emn-${mi}" placeholder="Metric name">
+          <input class="edit-name-in" style="flex:0 0 64px;" value="${m.unit}" id="emu-${mi}" placeholder="unit">
+          <button class="del-btn" onclick="deleteMetric(${mi})">🗑</button>
+        </div>`).join('')}
+      <button class="add-habit-btn" onclick="addMetric()">＋ Add metric</button>
+    </div>`;
+  }
+
+  // Food pillar toggle
+  const fpt = document.getElementById('food-pillar-toggle');
+  if (fpt) {
+    const on = state.foodEnabled;
+    fpt.innerHTML = `<div class="edit-pillar"><div class="edit-habit-row" style="padding:12px 16px;">
+      <span style="font-size:18px;">🍽️</span>
+      <div style="flex:1;">
+        <div style="font-size:13px;color:var(--text);">Food tracking</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px;">${on?'Active — meals, prep and what-I-ate show on Today and in reports.':'Locked — food removed from Today and reports. Grocery, tips and Food tab stay.'}</div>
+      </div>
+      <button class="active-pill ${on?'on':'off'}" onclick="toggleFoodPillar()">${on?'On':'Off'}</button>
+    </div></div>`;
+  }
+}
+
+function toggleFoodPillar() {
+  state.foodEnabled = !state.foodEnabled;
+  save();
+  renderEditList();
+  renderToday();
 }
 
 function renderEditHabit(pi,si,sg) {
   const isYN = sg.type==='bool';
-  return `<div class="edit-habit-row" id="eh-${pi}-${si}">
+  const count = editState[pi].subgoals.length;
+  const locked = isLocked(sg);
+  return `<div class="edit-habit-row" id="eh-${pi}-${si}" data-pi="${pi}" data-si="${si}">
+    <div class="drag-handle" onpointerdown="startDrag(event,${pi},${si})" title="Hold and drag to reorder">⠿</div>
+    <div class="reorder-col">
+      <button class="reorder-btn" onclick="moveHabit(${pi},${si},-1)" ${si===0?'disabled':''} aria-label="Move up">▲</button>
+      <button class="reorder-btn" onclick="moveHabit(${pi},${si},1)" ${si===count-1?'disabled':''} aria-label="Move down">▼</button>
+    </div>
     <input class="edit-name-in" value="${sg.name}" id="ehn-${pi}-${si}" placeholder="Habit name">
-    <button class="type-btn ${isYN?'yn':'num'}" id="eht-${pi}-${si}" onclick="toggleType(${pi},${si})">${isYN?'yes/no':'number'}</button>
+    <button class="type-btn ${isYN?'yn':'num'}" id="eht-${pi}-${si}" onclick="toggleType(${pi},${si})">${isYN?'y/n':'num'}</button>
+    <button class="active-pill ${locked?'off':'on'}" onclick="toggleLockIn(${pi},${si})" title="${locked?'Inactive — tap to activate':'Active — tap to deactivate'}">${locked?'Off':'On'}</button>
     <button class="del-btn" onclick="deleteHabit(${pi},${si})">🗑</button>
   </div>`;
+}
+
+function toggleLockIn(pi,si) {
+  syncEditInputs();
+  const sg = editState[pi].subgoals[si];
+  if (isLocked(sg)) {
+    // ACTIVATE: works for any habit, any time
+    sg.manualUnlock = true;
+    delete sg.manualLock;
+  } else {
+    // DEACTIVATE: works even if the schedule already unlocked it
+    sg.manualLock = true;
+    delete sg.manualUnlock;
+  }
+  renderEditList();
+}
+
+// ---- Touch/pointer drag-to-reorder within a pillar ----
+let dragInfo = null;
+function startDrag(e, pi, si) {
+  e.preventDefault();
+  syncEditInputs();
+  const row = document.getElementById('eh-'+pi+'-'+si);
+  dragInfo = { pi, si, row, startY: e.clientY };
+  row.classList.add('dragging');
+  document.addEventListener('pointermove', onDragMove);
+  document.addEventListener('pointerup', endDrag);
+}
+function onDragMove(e) {
+  if (!dragInfo) return;
+  e.preventDefault();
+  const container = document.getElementById('ep-habits-'+dragInfo.pi);
+  if (!container) return;
+  const rows = Array.from(container.querySelectorAll('.edit-habit-row'));
+  let targetIdx = dragInfo.si;
+  rows.forEach((r, idx) => {
+    const rect = r.getBoundingClientRect();
+    const mid = rect.top + rect.height/2;
+    if (e.clientY > mid) targetIdx = idx + 1;
+  });
+  targetIdx = Math.max(0, Math.min(rows.length-1, targetIdx > dragInfo.si ? targetIdx-1 : targetIdx));
+  if (targetIdx !== dragInfo.si) {
+    const arr = editState[dragInfo.pi].subgoals;
+    const [moved] = arr.splice(dragInfo.si, 1);
+    arr.splice(targetIdx, 0, moved);
+    dragInfo.si = targetIdx;
+    renderEditList();
+    // re-acquire the dragged row after re-render
+    const newRow = document.getElementById('eh-'+dragInfo.pi+'-'+targetIdx);
+    if (newRow) { newRow.classList.add('dragging'); dragInfo.row = newRow; }
+  }
+}
+function endDrag(e) {
+  if (dragInfo && dragInfo.row) dragInfo.row.classList.remove('dragging');
+  document.removeEventListener('pointermove', onDragMove);
+  document.removeEventListener('pointerup', endDrag);
+  dragInfo = null;
+}
+
+// Read current values from inputs into editState before any re-render
+function syncEditInputs() {
+  editState.forEach((p,pi)=>{
+    const nameInp = document.getElementById('ep-name-'+pi);
+    if(nameInp) p.name = nameInp.value;
+    p.subgoals.forEach((sg,si)=>{
+      const inp = document.getElementById('ehn-'+pi+'-'+si);
+      if(inp) sg.name = inp.value;
+    });
+  });
+  if (editMetrics) {
+    editMetrics.forEach((m,mi)=>{
+      const n = document.getElementById('emn-'+mi);
+      const u = document.getElementById('emu-'+mi);
+      if(n) m.name = n.value;
+      if(u) m.unit = u.value;
+    });
+  }
+}
+
+function moveHabit(pi, si, dir) {
+  syncEditInputs();
+  const arr = editState[pi].subgoals;
+  const ni = si + dir;
+  if (ni < 0 || ni >= arr.length) return;
+  [arr[si], arr[ni]] = [arr[ni], arr[si]];
+  renderEditList();
 }
 
 function cycleIcon(pi) {
@@ -1069,50 +2804,66 @@ function toggleType(pi,si) {
   const btn = document.getElementById('eht-'+pi+'-'+si);
   const isYN = editState[pi].subgoals[si].type==='bool';
   btn.className = 'type-btn '+(isYN?'yn':'num');
-  btn.textContent = isYN?'yes/no':'number';
+  btn.textContent = isYN?'y/n':'num';
 }
 
 function addHabit(pi) {
+  syncEditInputs();
   const newSg = {id:'s'+Date.now(), name:'New habit', type:'bool', unit:'', unlockDay:0};
   editState[pi].subgoals.push(newSg);
+  renderEditList();
   const si = editState[pi].subgoals.length-1;
-  const cont = document.getElementById('ep-habits-'+pi);
-  const row = document.createElement('div');
-  row.innerHTML = renderEditHabit(pi, si, newSg);
-  cont.appendChild(row.firstElementChild);
-  document.getElementById('ehn-'+pi+'-'+si).focus();
+  const el = document.getElementById('ehn-'+pi+'-'+si);
+  if(el){ el.focus(); el.select(); }
 }
 
 function deleteHabit(pi,si) {
+  syncEditInputs();
   editState[pi].subgoals.splice(si,1);
-  renderEditGoals();
+  renderEditList();
 }
 
 function deletePillar(pi) {
   if(editState.length<=1){alert('Keep at least one pillar!');return;}
+  syncEditInputs();
   editState.splice(pi,1);
-  renderEditGoals();
+  renderEditList();
 }
 
 function addPillar() {
+  syncEditInputs();
   editState.push({
     id:'p'+Date.now(), name:'New goal', icon:'🎯', color:rand(PILLAR_COLORS),
     subgoals:[{id:'s'+Date.now(),name:'First habit',type:'bool',unit:'',unlockDay:0}]
   });
-  renderEditGoals();
-  setTimeout(()=>{ document.getElementById('ep-name-'+(editState.length-1)).focus(); },100);
+  renderEditList();
+  setTimeout(()=>{ const el=document.getElementById('ep-name-'+(editState.length-1)); if(el){el.focus();el.select();} },100);
+}
+
+function addMetric() {
+  syncEditInputs();
+  editMetrics.push({id:'m'+Date.now(), name:'New metric', unit:''});
+  renderEditList();
+  const el = document.getElementById('emn-'+(editMetrics.length-1));
+  if(el){ el.focus(); el.select(); }
+}
+
+function deleteMetric(mi) {
+  syncEditInputs();
+  editMetrics.splice(mi,1);
+  renderEditList();
 }
 
 function saveGoals() {
-  editState.forEach((p,pi)=>{
-    p.name = document.getElementById('ep-name-'+pi).value.trim() || p.name;
-    p.subgoals.forEach((sg,si)=>{
-      const inp = document.getElementById('ehn-'+pi+'-'+si);
-      if(inp) sg.name = inp.value.trim() || sg.name;
-    });
+  syncEditInputs();
+  editState.forEach(p=>{
+    p.name = (p.name||'').trim() || 'Untitled';
+    p.subgoals.forEach(sg=>{ sg.name = (sg.name||'').trim() || 'Untitled'; });
   });
   state.pillars = editState;
+  state.metricDefs = (editMetrics||[]).filter(m=>(m.name||'').trim()).map(m=>({id:m.id, name:m.name.trim(), unit:(m.unit||'').trim()}));
   save();
+  selectedDate = today();
   renderToday();
   renderProgress();
   switchScreen('today', document.querySelector('.nav-btn'));
@@ -1137,6 +2888,7 @@ function renderDiscipline() {
 
   const quotes = [...MOTIV_SKIP.slice(0,3)];
   document.getElementById('motiv-preview').innerHTML = quotes.map(q=>`<div style="margin-bottom:6px;padding:8px 10px;background:rgba(255,107,107,0.08);border-radius:8px;font-size:11px;font-style:italic;color:#ff9999;">"${q}"</div>`).join('');
+  renderFoodTips();
 }
 
 // SCREEN SWITCHING
@@ -1148,6 +2900,8 @@ function switchScreen(name, btn) {
   if(name==='progress') renderProgress();
   if(name==='reminders') renderReminders();
   if(name==='today') renderToday();
+  if(name==='metrics') renderMetrics();
+  if(name==='food') renderFoodWeek();
 }
 
 // INSTALL PROMPT
@@ -1173,4 +2927,3 @@ if('serviceWorker' in navigator) {
 </script>
 </body>
 </html>
-
