@@ -2505,7 +2505,10 @@ function renderReportHistory() {
     return `<div class="hist-card">
       <div class="hist-head">
         <div><strong>Week ${wnum}</strong> <span style="color:var(--text3);font-size:11px;">${weekLabel(k)}</span></div>
-        <div style="color:var(--green);font-weight:600;">${r.snapshot.overallPct}%</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="color:var(--green);font-weight:600;">${r.snapshot.overallPct}%</div>
+          <button class="del-btn" onclick="deleteReport('${k}'); renderReportHistory();" title="Delete this report">🗑</button>
+        </div>
       </div>
       ${r.note?`<div class="hist-note">"${r.note}"</div>`:''}
       <button class="hist-compare-btn" onclick="openCompare('${k}')">Compare with another week →</button>
@@ -2533,6 +2536,15 @@ function renderSparkline(pts) {
     <path d="${d}" fill="none" stroke="var(--accent2)" stroke-width="2"/>
     ${dots}
   </svg>`;
+}
+
+// Delete a weekly report
+function deleteReport(weekKey) {
+  if (confirm('Delete this week\'s report? This cannot be undone.')) {
+    delete state.weeklyReports[weekKey];
+    save();
+    renderReportHistory();
+  }
 }
 
 let compareFirst = null;
