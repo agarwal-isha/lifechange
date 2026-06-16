@@ -722,10 +722,11 @@ html, body {
     <div class="scroll-body">
       <div class="insight-box" style="margin-bottom:14px;">📌 Log your numbers any day this week. The latest value goes into your Sunday report. If you skip a week, last week's value carries forward automatically.</div>
       <div id="metrics-list"></div>
-      <div style="font-size:11px;color:var(--text3);margin-top:10px;">To add, remove, or rename metrics → Goals tab, scroll to the Metrics section.</div>
 
       <div class="sec-label" style="margin-top:24px;">🛒 Grocery — this week (read-only)</div>
       <div id="grocery-list"></div>
+
+      <div id="next-week-section"></div>
     </div>
   </div>
 
@@ -767,8 +768,6 @@ html, body {
       <button class="add-pillar-btn" onclick="addPillar()">＋ Add new goal pillar</button>
       <div class="sec-label" style="margin-top:16px;">🍽️ Food pillar</div>
       <div id="food-pillar-toggle"></div>
-      <div class="sec-label" style="margin-top:16px;">📊 Metrics (weight, income, mood…)</div>
-      <div id="edit-metrics-container"></div>
       <button class="save-btn" onclick="saveGoals()">Save changes</button>
       <button class="discard-btn" onclick="discardGoals()">Discard</button>
     </div>
@@ -2225,28 +2224,41 @@ function renderMetrics() {
   const line = document.getElementById('metrics-week-line');
   if (line) line.textContent = 'Week ' + isoWeekNum(mon) + ' · ' + weekLabel(mon);
   renderGrocery();
+  
+  // Initialize editMetrics if not already done
+  if (!editMetrics) {
+    editMetrics = JSON.parse(JSON.stringify(state.metricDefs || []));
+  }
+  
+  // Single unified metrics block
   const list = document.getElementById('metrics-list');
   if (!list) return;
-  list.innerHTML = (state.metricDefs || []).map(m => {
-    const thisWeek = (state.metricLogs[mon]||{})[m.id];
-    const carry = metricValueWithCarry(m.id, mon);
-    let subline = '';
-    if (thisWeek !== undefined) subline = 'Logged this week';
-    else if (carry.value !== undefined) subline = `Carrying forward: ${carry.value} ${m.unit} (week ${isoWeekNum(carry.from)})`;
-    else subline = 'No entry yet';
-    return `<div class="card" style="padding:13px 16px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:14px;color:var(--text);">${m.name}</div>
-          <div style="font-size:11px;color:var(--text3);margin-top:2px;">${subline}</div>
-        </div>
-        <div class="num-row">
-          <input class="num-in" style="width:84px;" type="number" step="any" value="${thisWeek!==undefined?thisWeek:''}" placeholder="${carry.value!==undefined?carry.value:'–'}" onchange="setMetricVal('${m.id}', this.value); renderMetrics();">
-          <span class="unit-lbl">${m.unit}</span>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+  
+  list.innerHTML = `<div class="edit-pillar">
+    ${editMetrics.map((m, mi) => {
+      const thisWeek = (state.metricLogs[mon]||{})[m.id];
+      return `<div class="edit-habit-row">
+        <input class="edit-name-in" value="${m.name}" id="emn-${mi}" placeholder="Metric name" onchange="editMetrics[${mi}].name=this.value; saveMetricsAuto();">
+        <input class="edit-name-in" style="flex:0 0 64px;" value="${m.unit}" id="emu-${mi}" placeholder="unit" onchange="editMetrics[${mi}].unit=this.value; saveMetricsAuto();">
+        <input class="num-in" style="width:70px;" type="number" step="any" value="${thisWeek!==undefined?thisWeek:''}" placeholder="–" onchange="setMetricVal('${m.id}', this.value);">
+        <button class="del-btn" onclick="deleteMetric(${mi});">🗑</button>
+      </div>`;
+    }).join('')}
+    <button class="add-habit-btn" onclick="addMetric();">＋ Add metric</button>
+  </div>`;
+  
+  // Render next week preview
+  renderNextWeekPreview();
+}
+
+// Auto-save metrics to state (called when name/unit changes)
+function saveMetricsAuto() {
+  state.metricDefs = editMetrics.filter(m => (m.name||'').trim()).map(m => ({
+    id: m.id, 
+    name: m.name.trim(), 
+    unit: (m.unit||'').trim()
+  }));
+  save();
 }
 
 // ===== GROCERY (read-only, current meal-week) =====
@@ -2362,13 +2374,20 @@ function selectFoodDay(d) {
   foodSelectedDay = d;
   renderFoodProgress();
   renderFoodDayDetail();
+  
+  // Smooth scroll to detail panel
+  setTimeout(() => {
+    const detailEl = document.getElementById('food-day-detail');
+    if (detailEl) {
+      detailEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 100);
 }
 
 function renderFoodDayDetail() {
   const wrap = document.getElementById('food-day-detail');
   if (!wrap) return;
   const d = foodSelectedDay || today();
-  if (d > today()) { wrap.innerHTML = ''; return; }
   const data = mealDataForDate(d);
   const dateObj = new Date(d+'T00:00:00');
   const label = dateObj.toLocaleDateString('en-GB',{weekday:'long', day:'numeric', month:'short'});
@@ -2426,6 +2445,53 @@ function autoSaveMissedWeeks() {
     const d = new Date(mon+'T00:00:00'); d.setDate(d.getDate()-7); mon = dateStr(d);
   }
   save();
+}
+
+// Get next week's Monday
+function nextWeekMonday() {
+  const d = new Date(currentWeekMonday() + 'T00:00:00');
+  d.setDate(d.getDate() + 7);
+  return dateStr(d);
+}
+
+// Get meal data for next week
+// Render next week preview in Metrics tab
+function renderNextWeekPreview() {
+  const wrap = document.getElementById('next-week-section');
+  if (!wrap) return;
+  
+  const nextMon = nextWeekMonday();
+  const nextWeekNum = mealWeekForDate(nextMon);
+  const nextDayData = mealDataForDate(nextMon);
+  const g = GROCERY[nextWeekNum];
+  
+  let html = `
+    <div style="margin-top:20px; padding-top:16px; border-top:2px solid var(--accent2); margin-bottom:16px;">
+      <div style="font-size:13px; font-weight:700; color:var(--accent); letter-spacing:0.5px; margin-bottom:12px;">📅 NEXT WEEK PREPARATION</div>
+      
+      <div class="card" style="padding:14px 16px; margin-bottom:12px;">
+        <div style="font-size:12px; font-weight:600; color:var(--accent); margin-bottom:10px;">Monday's Meals</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.8;">`;
+  
+  MEAL_SLOTS.forEach(s => {
+    const meal = nextDayData.meals[s.key];
+    html += `<div>• ${s.label}: ${meal.name}</div>`;
+  });
+  
+  html += `</div></div>`;
+  
+  // Add grocery order one
+  if (g && g.o1) {
+    const cats = Object.keys(g.o1.cats).map(cat =>
+      `<div class="groc-cat"><div class="groc-cat-name">${cat}</div><div class="groc-items">${g.o1.cats[cat]}</div></div>`
+    ).join('');
+    html += `<div class="card" style="padding:14px 16px;">
+      <div class="groc-title">${g.o1.title}</div>${cats}</div>`;
+  }
+  
+  html += `</div>`;
+  
+  wrap.innerHTML = html;
 }
 
 function renderReportHistory() {
@@ -2841,17 +2907,24 @@ function addPillar() {
 }
 
 function addMetric() {
-  syncEditInputs();
-  editMetrics.push({id:'m'+Date.now(), name:'New metric', unit:''});
-  renderEditList();
-  const el = document.getElementById('emn-'+(editMetrics.length-1));
-  if(el){ el.focus(); el.select(); }
+  editMetrics.push({id:'m'+Date.now(), name:'', unit:''});
+  renderMetrics();
+  setTimeout(() => {
+    const el = document.getElementById('emn-'+(editMetrics.length-1));
+    if(el){ el.focus(); el.select(); }
+  }, 50);
 }
 
 function deleteMetric(mi) {
-  syncEditInputs();
   editMetrics.splice(mi,1);
-  renderEditList();
+  // Auto-save to state
+  state.metricDefs = editMetrics.filter(m => (m.name||'').trim()).map(m => ({
+    id: m.id, 
+    name: m.name.trim(), 
+    unit: (m.unit||'').trim()
+  }));
+  save();
+  renderMetrics();
 }
 
 function saveGoals() {
