@@ -2146,12 +2146,6 @@ function renderReportArea() {
       </div>
       <div style="font-size:12px;color:var(--text2);font-style:italic;margin-bottom:14px;line-height:1.6;">"${sundayQuote}"</div>
 
-      <div class="rp-sub-label">Each day this week</div>
-      <div class="chart-bars" style="height:60px;margin-bottom:14px;">${chartBars}</div>
-
-      <div class="rp-sub-label">Pillars vs last week</div>
-      ${state.pillars.map(p=>`<div class="rp-stat-row"><span>${p.icon} ${p.name}</span><strong>${snap.pillarPct[p.name]}% ${trendFor(p.name, snap.pillarPct[p.name])}</strong></div>`).join('')}
-
       <div class="rp-sub-label" style="margin-top:12px;">Active habits this week</div>
       ${habitsHtml || '<div style="font-size:12px;color:var(--text3);">No active habits yet.</div>'}
 
