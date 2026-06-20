@@ -146,11 +146,6 @@ html, body {
 .habit-info { flex: 1; min-width: 0; }
 .habit-name { font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .habit-type { font-size: 10px; color: var(--text3); margin-top: 2px; }
-.habit-locked { opacity: 0.35; }
-.lock-badge {
-  font-size: 10px; color: var(--text3);
-  background: var(--bg4); border-radius: 8px; padding: 3px 8px;
-}
 
 .action-btns { display: flex; gap: 6px; flex-shrink: 0; }
 .act-btn {
@@ -183,17 +178,6 @@ html, body {
 .motiv-banner.show { display: block; }
 .mb-skip { background: rgba(255,107,107,0.1); color: #ff9999; border-left: 2px solid var(--red); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
 .mb-partial { background: rgba(200,180,255,0.1); color: var(--accent); border-left: 2px solid var(--accent2); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
-
-/* UNLOCK NOTICE */
-.unlock-notice {
-  background: rgba(200,180,255,0.08);
-  border: 0.5px solid rgba(200,180,255,0.2);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  font-size: 12px; color: var(--accent);
-  margin-bottom: 12px;
-  display: flex; align-items: center; gap: 8px;
-}
 
 /* SECTION LABEL */
 .sec-label {
@@ -281,9 +265,16 @@ html, body {
 }
 .edit-habit-row:last-child { border-bottom: none; }
 .edit-name-in {
-  flex: 1; background: var(--bg3); border: 0.5px solid var(--border2);
-  border-radius: 8px; padding: 7px 10px; color: var(--text);
+  flex: 1 1 0; min-width: 0; max-width: 95%; background: var(--bg3); border: 0.5px solid var(--border2);
+  border-radius: 8px; padding: 7px 8px; color: var(--text);
   font-size: 12px; font-family: 'DM Sans', sans-serif; outline: none;
+}
+.edit-unit-in {
+  width: 22px; flex: 0 0 22px; min-width: 20px; max-width: 25px;
+  background: var(--bg3); border: 0.5px solid var(--accent2);
+  border-radius: 8px; padding: 7px 0; color: var(--accent);
+  font-size: 10px; font-family: 'DM Sans', sans-serif; outline: none; text-align: center;
+  overflow: hidden;
 }
 .type-btn {
   font-size: 10px; padding: 5px 8px; border-radius: 7px;
@@ -313,27 +304,6 @@ html, body {
   padding: 7px 4px; color: var(--accent); font-size: 12px;
   font-family: 'DM Sans', sans-serif; outline: none; text-align: center;
 }
-.lock-btn {
-  background: var(--bg3); border: 0.5px solid var(--border2);
-  border-radius: 7px; padding: 5px 6px; font-size: 12px; cursor: pointer;
-  flex-shrink: 0;
-}
-.lock-btn.is-locked { background: var(--amber2); border-color: var(--amber); }
-.lockin-now-btn {
-  background: rgba(255,179,71,0.12); border: 0.5px solid rgba(255,179,71,0.35);
-  color: var(--amber); border-radius: 8px; padding: 6px 10px;
-  font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif;
-  flex-shrink: 0;
-}
-.edit-habit-block { border-bottom: 0.5px solid var(--border); }
-.edit-habit-block:last-child { border-bottom: none; }
-.active-pill {
-  flex-shrink: 0; min-width: 38px; padding: 6px 10px; border-radius: 7px;
-  font-size: 11px; font-weight: 600; cursor: pointer; border: 0.5px solid;
-  font-family: 'DM Sans', sans-serif;
-}
-.active-pill.on { background: var(--green3); color: var(--green); border-color: var(--green2); }
-.active-pill.off { background: var(--bg3); color: var(--text3); border-color: var(--border2); }
 .day-note-ro {
   flex: 1; font-size: 12px; color: var(--text2); font-style: italic;
   line-height: 1.5; padding: 4px 0;
@@ -508,7 +478,6 @@ html, body {
   font-size: 11px; margin: 4px 4px 0 0;
 }
 .chip-active { background: var(--green2); color: var(--green); }
-.chip-soon { background: var(--bg3); color: var(--text3); }
 
 /* REPORT */
 .report-pillar {
@@ -659,9 +628,6 @@ html, body {
       </div>
     </div>
     <div class="scroll-body" id="today-body">
-      <div id="unlock-notice" class="unlock-notice" style="display:none;">
-        🔒 <span id="unlock-text">2 habits active. More unlock as you build consistency.</span>
-      </div>
       <div id="pillars-container"></div>
     </div>
   </div>
@@ -788,7 +754,6 @@ html, body {
         <div class="disc-body">
           Active habits right now:
           <div style="margin-top:8px;" id="unlock-chips"></div>
-          <div style="margin-top:8px;font-size:11px;color:var(--text3);">Day 14 → more habits unlock. Day 30 → full suite.</div>
         </div>
       </div>
       <div class="disc-section">
@@ -1456,25 +1421,6 @@ function daysLoggedCount() {
   return days.size;
 }
 
-function getDaysSinceStart() {
-  const start = new Date(state.appStartDate);
-  const now = new Date();
-  return Math.floor((now - start) / 86400000);
-}
-
-function isLocked(sg) {
-  if (sg.manualLock) return true;      // user deactivated it
-  if (sg.manualUnlock) return false;   // user activated it
-  return sg.unlockDay > getDaysSinceStart(); // otherwise follow the schedule
-}
-
-// Lock in (activate) a habit right now, anytime
-function lockInHabit(sgId) {
-  state.pillars.forEach(p=>p.subgoals.forEach(sg=>{ if(sg.id===sgId) sg.manualUnlock = true; }));
-  save();
-  renderToday();
-}
-
 function getLog(sgId, date) {
   const key = sgId + '_' + date;
   return state.logs[key] || {status:'pending', value:0};
@@ -1487,7 +1433,7 @@ function setLog(sgId, date, data) {
 }
 
 function getPillarCompletion(pillar, date) {
-  const active = pillar.subgoals.filter(sg => !isLocked(sg));
+  const active = pillar.subgoals;
   if (!active.length) return 0;
   let done = 0;
   active.forEach(sg => {
@@ -1501,7 +1447,7 @@ function getPillarCompletion(pillar, date) {
 function getDayCompletion(date) {
   let total = 0, done = 0;
   state.pillars.forEach(p => {
-    const active = p.subgoals.filter(sg => !isLocked(sg));
+    const active = p.subgoals;
     total += active.length;
     active.forEach(sg => {
       const log = getLog(sg.id, date);
@@ -1632,19 +1578,12 @@ function renderToday() {
     container.appendChild(bdiv);
   }
 
-  const days = getDaysSinceStart();
-  const notice = document.getElementById('unlock-notice');
-  if (days < 14 && !isEditingPast()) {
-    notice.style.display = 'flex';
-    document.getElementById('unlock-text').textContent = `Day ${days} — Building your base. Inactive habits are in the Goals tab — activate any of them whenever you're ready.`;
-  } else { notice.style.display = 'none'; }
-
   state.pillars.forEach(pillar => {
     const div = document.createElement('div');
     div.className = 'card';
     div.id = 'pillar-' + pillar.id;
 
-    const active = pillar.subgoals.filter(sg => !isLocked(sg));
+    const active = pillar.subgoals;
     const doneCt = active.filter(sg => {
       const log = getLog(sg.id, selectedDate);
       return sg.type==='bool' ? log.status==='done' : log.value > 0;
@@ -1780,9 +1719,7 @@ function backToToday() {
 }
 
 function renderHabitRow(sg, pillar) {
-  const locked = isLocked(sg);
   const log = getLog(sg.id, selectedDate);
-  if (locked) return ''; // inactive habits don't appear on the main page — activate them in Goals
   if (sg.type === 'bool') {
     const isDone = log.status === 'done';
     const isSkip = log.status === 'skipped';
@@ -1856,7 +1793,7 @@ function hideBanner(pid) {
 function updatePillarProgress(pid) {
   const pillar = state.pillars.find(p=>p.id===pid);
   if(!pillar) return;
-  const active = pillar.subgoals.filter(sg=>!isLocked(sg));
+  const active = pillar.subgoals;
   const doneCt = active.filter(sg=>{
     const log=getLog(sg.id,selectedDate);
     return sg.type==='bool'?log.status==='done':log.value>0;
@@ -1873,7 +1810,7 @@ function checkAllDone() {
   if (isEditingPast()) return; // no reward popups when editing a past day
   let total=0, done=0;
   state.pillars.forEach(p=>{
-    const active=p.subgoals.filter(sg=>!isLocked(sg));
+    const active=p.subgoals;
     total+=active.length;
     active.forEach(sg=>{
       const log=getLog(sg.id,selectedDate);
@@ -2015,11 +1952,10 @@ function editDay(d) {
 function buildWeekSnapshot(mondayStr) {
   const wd = weekDates(mondayStr);
   const todayS = today();
-  // Per-habit stats — only locked-in (active) habits appear in reports
+  // Per-habit stats — all habits appear in reports
   const habitStats = [];
   state.pillars.forEach(p => {
     p.subgoals.forEach(sg => {
-      if (isLocked(sg)) return;
       let boolDone = 0, numTotal = 0, daysCounted = 0;
       wd.forEach(d => {
         if (d > todayS) return;
@@ -2765,33 +2701,13 @@ function toggleFoodPillar() {
 function renderEditHabit(pi,si,sg) {
   const isYN = sg.type==='bool';
   const count = editState[pi].subgoals.length;
-  const locked = isLocked(sg);
   return `<div class="edit-habit-row" id="eh-${pi}-${si}" data-pi="${pi}" data-si="${si}">
     <div class="drag-handle" onpointerdown="startDrag(event,${pi},${si})" title="Hold and drag to reorder">⠿</div>
-    <div class="reorder-col">
-      <button class="reorder-btn" onclick="moveHabit(${pi},${si},-1)" ${si===0?'disabled':''} aria-label="Move up">▲</button>
-      <button class="reorder-btn" onclick="moveHabit(${pi},${si},1)" ${si===count-1?'disabled':''} aria-label="Move down">▼</button>
-    </div>
     <input class="edit-name-in" value="${sg.name}" id="ehn-${pi}-${si}" placeholder="Habit name">
+    <input class="edit-unit-in" value="${sg.unit||''}" id="ehu-${pi}-${si}" placeholder="unit" title="Unit e.g. min, reps, km" style="visibility:${isYN?'hidden':'visible'};">
     <button class="type-btn ${isYN?'yn':'num'}" id="eht-${pi}-${si}" onclick="toggleType(${pi},${si})">${isYN?'y/n':'num'}</button>
-    <button class="active-pill ${locked?'off':'on'}" onclick="toggleLockIn(${pi},${si})" title="${locked?'Inactive — tap to activate':'Active — tap to deactivate'}">${locked?'Off':'On'}</button>
     <button class="del-btn" onclick="deleteHabit(${pi},${si})">🗑</button>
   </div>`;
-}
-
-function toggleLockIn(pi,si) {
-  syncEditInputs();
-  const sg = editState[pi].subgoals[si];
-  if (isLocked(sg)) {
-    // ACTIVATE: works for any habit, any time
-    sg.manualUnlock = true;
-    delete sg.manualLock;
-  } else {
-    // DEACTIVATE: works even if the schedule already unlocked it
-    sg.manualLock = true;
-    delete sg.manualUnlock;
-  }
-  renderEditList();
 }
 
 // ---- Touch/pointer drag-to-reorder within a pillar ----
@@ -2844,6 +2760,8 @@ function syncEditInputs() {
     p.subgoals.forEach((sg,si)=>{
       const inp = document.getElementById('ehn-'+pi+'-'+si);
       if(inp) sg.name = inp.value;
+      const u = document.getElementById('ehu-'+pi+'-'+si);
+      if(u) sg.unit = u.value.trim();
     });
   });
   if (editMetrics) {
@@ -2877,6 +2795,8 @@ function toggleType(pi,si) {
   const isYN = editState[pi].subgoals[si].type==='bool';
   btn.className = 'type-btn '+(isYN?'yn':'num');
   btn.textContent = isYN?'y/n':'num';
+  const unitIn = document.getElementById('ehu-'+pi+'-'+si);
+  if (unitIn) unitIn.style.visibility = isYN ? 'hidden' : 'visible';
 }
 
 function addHabit(pi) {
@@ -2958,11 +2878,9 @@ function discardGoals() {
 // DISCIPLINE
 function renderDiscipline() {
   document.getElementById('daily-quote').textContent = rand(QUOTES);
-  const chips = state.pillars.flatMap(p=>p.subgoals).filter(sg=>!isLocked(sg));
-  const locked = state.pillars.flatMap(p=>p.subgoals).filter(sg=>isLocked(sg));
+  const habits = state.pillars.flatMap(p=>p.subgoals);
   let html = '';
-  chips.forEach(sg=>{ html+=`<span class="unlock-chip chip-active">✓ ${sg.name}</span>`; });
-  locked.forEach(sg=>{ html+=`<span class="unlock-chip chip-soon">🔒 day ${sg.unlockDay}</span>`; });
+  habits.forEach(sg=>{ html+=`<span class="unlock-chip chip-active">✓ ${sg.name}</span>`; });
   document.getElementById('unlock-chips').innerHTML = html;
 
   const quotes = [...MOTIV_SKIP.slice(0,3)];
