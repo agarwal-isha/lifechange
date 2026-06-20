@@ -2063,16 +2063,15 @@ function renderReportArea() {
     `<div class="rp-stat-row"><span>${h.name}</span><strong>${fmtHabitStat(h)}</strong></div>`
   ).join('');
 
-  // Metrics — read-only here, values come from Metrics tab (with carry-forward)
-  let metricsHtml = state.metricDefs.map(m => {
-    const r = metricValueWithCarry(m.id, mon);
-    const valStr = r.value !== undefined ? `${r.value} ${m.unit}` : '–';
-    const carryTag = r.carried ? ` <span style="font-size:10px;color:var(--text3);">(from week ${isoWeekNum(r.from)})</span>` : '';
-    return `<div class="rp-stat-row"><span>${m.name}</span><strong>${valStr}${carryTag}</strong></div>`;
-  }).join('');
-
   const weekNote = (state.weekNotes && state.weekNotes[mon]) || '';
   const sundayQuote = rand(SUNDAY_QUOTES);
+
+  const metricsHtml = (state.metricDefs || []).map(m => {
+    const r = metricValueWithCarry(m.id, mon);
+    const val = r.value !== undefined ? r.value : '–';
+    const unit = m.unit || '';
+    return `<div class="rp-stat-row"><span>${m.name}</span><strong>${val}${unit ? ' ' + unit : ''}</strong></div>`;
+  }).join('');
 
   area.innerHTML = `
     <div class="report-pillar">
@@ -2085,8 +2084,8 @@ function renderReportArea() {
       <div class="rp-sub-label" style="margin-top:12px;">Active habits this week</div>
       ${habitsHtml || '<div style="font-size:12px;color:var(--text3);">No active habits yet.</div>'}
 
-      <div class="rp-sub-label" style="margin-top:12px;">📊 Metrics <span style="text-transform:none;letter-spacing:0;">(edit in the Metrics tab)</span></div>
-      ${metricsHtml || '<div style="font-size:12px;color:var(--text3);">No metrics yet. Add some in Goals → Metrics.</div>'}
+      <div class="rp-sub-label" style="margin-top:12px;">Metrics</div>
+      ${metricsHtml || '<div style="font-size:12px;color:var(--text3);">No metrics logged yet.</div>'}
 
       <div class="rp-sub-label" style="margin-top:12px;">Day notes <span style="text-transform:none;letter-spacing:0;">(written on each day's page)</span></div>
       ${dayNotesHtml || '<div style="font-size:12px;color:var(--text3);">No day notes this week yet. Add them at the bottom of the Today page.</div>'}
