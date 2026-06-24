@@ -1439,7 +1439,7 @@ function getPillarCompletion(pillar, date) {
   active.forEach(sg => {
     const log = getLog(sg.id, date);
     if (sg.type === 'bool') { if (log.status === 'done') done++; }
-    else { if (log.value > 0) done += Math.min(1, log.value / (sg.target||1)); }
+    else { if (log.value > 0) done++; }
   });
   return done / active.length;
 }
